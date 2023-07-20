@@ -14,29 +14,43 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ImageIcon(
-              AssetImage("mizu_app_icon.png"),
-              size: 90,
-              color: Colors.transparent,
-            ),
-            MyTextField(
-              controller: emailController,
-              hintText: "Email",
-              obscureText: false,
-            ),
-            Text(
-              "AAAA",
-              style: TextStyle(
-                fontSize: 50,
-                color: Colors.purple[200]!,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const ImageIcon(
+                AssetImage("mizu_app_icon.png"),
+                size: 150,
+                color: Colors.transparent,
               ),
-            ),
-          ],
+              const SizedBox(
+                height: 20,
+              ),
+              MyTextField(
+                controller: emailController,
+                hintText: "Email",
+                obscureText: false,
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              MyTextField(
+                controller: passwordController,
+                hintText: "Password",
+                obscureText: true,
+              ),
+              Text(
+                "AAAA",
+                style: TextStyle(
+                  fontSize: 50,
+                  color: Colors.purple[200]!,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
