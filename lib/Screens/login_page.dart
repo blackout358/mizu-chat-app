@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mizu/widgets/app_button.dart';
 import 'package:mizu/widgets/text_field.dart';
 
 class LoginPage extends StatefulWidget {
@@ -27,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
                 color: Colors.transparent,
               ),
               const SizedBox(
-                height: 20,
+                height: 50,
               ),
               MyTextField(
                 controller: emailController,
@@ -42,13 +43,27 @@ class _LoginPageState extends State<LoginPage> {
                 hintText: "Password",
                 obscureText: true,
               ),
-              Text(
-                "AAAA",
-                style: TextStyle(
-                  fontSize: 50,
-                  color: Colors.purple[200]!,
-                ),
+              const SizedBox(
+                height: 8,
               ),
+              AppButtons(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.black87,
+                borderColor: Colors.black,
+                text: "Login",
+                width: double.infinity,
+                height: 80,
+                borderRadius: 20,
+                onPressed: () {},
+                fontSize: 0.04,
+              )
+              // Text(
+              //   "AAAA",
+              //   style: TextStyle(
+              //     fontSize: 50,
+              //     color: Colors.purple[200]!,
+              //   ),
+              // ),
             ],
           ),
         ),
