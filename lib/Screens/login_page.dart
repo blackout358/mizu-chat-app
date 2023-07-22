@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mizu/logic/auth/auth_service.dart';
 import 'package:mizu/widgets/app_button.dart';
 import 'package:mizu/widgets/text_field.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,6 +14,26 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  void signIn() async {
+    final authService = Provider.of<AuthService>(context, listen: false);
+
+    try {
+      await authService.signInWithEmailandPassword(
+        emailController.text,
+        passwordController.text,
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            e.toString(),
+          ),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -22,10 +44,11 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const ImageIcon(
-                AssetImage("mizu_app_icon.png"),
-                size: 150,
-                color: Colors.transparent,
+              Image.asset(
+                "assets/mizu_app_icon.png",
+                width: 150,
+                height: 150,
+                // color: Colors.transparent,
               ),
               const SizedBox(
                 height: 50,
@@ -41,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
               MyTextField(
                 controller: passwordController,
                 hintText: "Password",
-                obscureText: true,
+                obscureText: false,
               ),
               const SizedBox(
                 height: 8,
@@ -49,12 +72,14 @@ class _LoginPageState extends State<LoginPage> {
               AppButtons(
                 foregroundColor: Colors.white,
                 backgroundColor: Colors.black87,
-                borderColor: Colors.black,
+                borderColor: Colors.transparent,
                 text: "Login",
                 width: double.infinity,
-                height: 80,
+                height: 65,
                 borderRadius: 20,
-                onPressed: () {},
+                onPressed: () {
+                  signIn();
+                },
                 fontSize: 0.04,
               )
               // Text(

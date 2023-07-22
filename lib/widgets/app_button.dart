@@ -36,7 +36,7 @@ class AppButtons extends StatelessWidget {
           borderRadius: BorderRadius.circular(borderRadius.toDouble()),
           border: Border.all(
             color: borderColor,
-            width: 1.0,
+            width: 0.0,
           ),
         ),
         child: ElevatedButton(

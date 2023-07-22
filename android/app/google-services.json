@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "862247011568",
+    "project_id": "mizu-4b970",
+    "storage_bucket": "mizu-4b970.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862247011568:android:0f9084c3ad788f8c622e35",
+        "android_client_info": {
+          "package_name": "com.example.mizu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "862247011568-7d54c3e7rbqm01q2ipioibg5bcnsv0sm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARQ6PRW7kULqCBwOCInV3zHynR_KBwDsw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "862247011568-7d54c3e7rbqm01q2ipioibg5bcnsv0sm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
