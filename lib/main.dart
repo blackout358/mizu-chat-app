@@ -5,6 +5,8 @@ import 'package:mizu/firebase_options.dart';
 import 'package:mizu/logic/auth/auth_service.dart';
 import 'package:provider/provider.dart';
 
+import 'logic/auth/auth_gate.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -25,7 +27,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.grey.shade200,
-        body: LoginPage(),
+        body: AuthGate(),
       ),
     );
   }
