@@ -17,20 +17,27 @@ class _RegisterPageState extends State<RegisterPage> {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
-  void signIn() async {
+  void signUp() async {
+    if (passwordController.text != confirmPasswordController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Passwords do not match!"),
+        ),
+      );
+      return;
+    }
+
     final authService = Provider.of<AuthService>(context, listen: false);
 
     try {
-      await authService.signInWithEmailandPassword(
+      await authService.signUpWithEmailandPassword(
         emailController.text,
         passwordController.text,
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            e.toString(),
-          ),
+          content: Text(e.toString()),
         ),
       );
     }
@@ -73,22 +80,28 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 8,
                 ),
                 MyTextField(
-                  controller: passwordController,
-                  hintText: "Password",
+                  controller: confirmPasswordController,
+                  hintText: "Confirm password",
                   obscureText: false,
+                ),
+                const SizedBox(
+                  height: 8,
                 ),
                 AppButtons(
                   foregroundColor: Colors.white,
                   backgroundColor: Colors.black87,
                   borderColor: Colors.transparent,
-                  text: "Login",
+                  text: "Sign Up",
                   width: double.infinity,
                   height: 65,
                   borderRadius: 20,
                   onPressed: () {
-                    signIn();
+                    signUp();
                   },
                   fontSize: 0.04,
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
