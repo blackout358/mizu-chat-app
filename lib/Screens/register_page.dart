@@ -4,17 +4,18 @@ import 'package:mizu/widgets/app_button.dart';
 import 'package:mizu/widgets/text_field.dart';
 import 'package:provider/provider.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final VoidCallback onPressed;
-  const LoginPage({super.key, required this.onPressed});
+  const RegisterPage({super.key, required this.onPressed});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   void signIn() async {
     final authService = Provider.of<AuthService>(context, listen: false);
@@ -71,6 +72,11 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 8,
                 ),
+                MyTextField(
+                  controller: passwordController,
+                  hintText: "Password",
+                  obscureText: false,
+                ),
                 AppButtons(
                   foregroundColor: Colors.white,
                   backgroundColor: Colors.black87,
@@ -93,20 +99,13 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     GestureDetector(
                       onTap: widget.onPressed,
-                      child: const Text("Register now",
+                      child: const Text("Login now",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           )),
                     ),
                   ],
-                )
-                // Text(
-                //   "AAAA",
-                //   style: TextStyle(
-                //     fontSize: 50,
-                //     color: Colors.purple[200]!,
-                //   ),
-                // ),
+                ),
               ],
             ),
           ),

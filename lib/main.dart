@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mizu/Screens/login_page.dart';
 import 'package:mizu/firebase_options.dart';
 import 'package:mizu/logic/auth/auth_service.dart';
+import 'package:mizu/logic/auth/login_or_register.dart';
 import 'package:provider/provider.dart';
 
 import 'logic/auth/auth_gate.dart';
@@ -27,7 +28,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.grey.shade200,
-        body: AuthGate(),
+        body: LoginOrRegister(),
       ),
     );
   }
