@@ -28,7 +28,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.grey.shade200,
-        body: LoginOrRegister(),
+        body: AuthGate(),
       ),
     );
   }
