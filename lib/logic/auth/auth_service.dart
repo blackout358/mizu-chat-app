@@ -1,9 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 
 class AuthService extends ChangeNotifier {
+  // instance of auth
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  // instance of firestore
+  final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
 
   Future<UserCredential> signInWithEmailandPassword(
       String email, String password) async {
@@ -15,6 +20,11 @@ class AuthService extends ChangeNotifier {
         password: password,
       );
 
+      _fireStore.collection('users').doc(userCredential.user!.uid).set({
+        'uid': userCredential.user!.uid,
+        'email': email,
+      }, SetOptions(merge: true));
+
       return userCredential;
     }
     // catch errors
@@ -23,6 +33,7 @@ class AuthService extends ChangeNotifier {
     }
   }
 
+  // Create user
   Future<UserCredential> signUpWithEmailandPassword(
       String email, password) async {
     try {
@@ -31,6 +42,11 @@ class AuthService extends ChangeNotifier {
         email: email,
         password: password,
       );
+
+      _fireStore.collection('users').doc(userCredential.user!.uid).set({
+        'uid': userCredential.user!.uid,
+        'email': email,
+      });
       return userCredential;
     } on FirebaseAuthException catch (e) {
       throw Exception(e.code);
