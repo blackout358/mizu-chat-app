@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mizu/logic/chat/chat_service.dart';
+import 'package:mizu/widgets/chat_bubble.dart';
 import 'package:mizu/widgets/text_field.dart';
 
 class ChatPage extends StatefulWidget {
@@ -85,30 +86,58 @@ class _ChatPageState extends State<ChatPage> {
                     ? CrossAxisAlignment.end
                     : CrossAxisAlignment.start,
             children: [
-              Text(data['senderEmail']),
-              Text(data['message']),
+              // Text(data['senderEmail']),
+              (data['senderID'] != _firebaseAuth.currentUser!.uid)
+                  ? ChatBubble(
+                      message: data['message'],
+                      colour: Colors.grey[300]!,
+                    )
+                  : ChatBubble(
+                      message: data['message'], colour: Colors.purple[200]!)
+              // ChatBubble(
+              //   message: data['message'],
+              //   colour: Colors.purple[200]!,
+              // )
             ],
           ),
         ));
   }
 
   Widget _buildMessageInput() {
-    return Row(
-      children: [
-        Expanded(
-          child: MyTextField(
-            controller: _messageController,
-            hintText: 'Enter message',
-            obscureText: false,
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: MyTextField(
+              controller: _messageController,
+              hintText: 'Enter message',
+              obscureText: false,
+            ),
           ),
-        ),
-        IconButton(
+          // GestureDetector(
+          //   onTap: sendMessage,
+          //   child: Container(
+          //       width: 50,
+          //       height: 50,
+          //       color: Colors.transparent,
+          //       child: Icon(
+          //         Icons.send,
+          //         size: 40,
+          //       )),
+          // )
+          IconButton(
             onPressed: sendMessage,
+            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
             icon: const Icon(
-              Icons.arrow_upward,
+              Icons.send,
               size: 40,
-            ))
-      ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
