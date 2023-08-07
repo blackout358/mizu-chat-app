@@ -77,11 +77,18 @@ class _ChatPageState extends State<ChatPage> {
 
     return Container(
         alignment: alignment,
-        child: Column(
-          children: [
-            Text(data['senderEmail']),
-            Text(data['message']),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment:
+                (data['senderID'] == _firebaseAuth.currentUser!.uid)
+                    ? CrossAxisAlignment.end
+                    : CrossAxisAlignment.start,
+            children: [
+              Text(data['senderEmail']),
+              Text(data['message']),
+            ],
+          ),
         ));
   }
 
