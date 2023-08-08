@@ -20,8 +20,14 @@ class _RegisterPageState extends State<RegisterPage> {
   void signUp() async {
     if (passwordController.text != confirmPasswordController.text) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Passwords do not match!"),
+        SnackBar(
+          content: const Text(
+            "Passwords do not match!",
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+          backgroundColor: Colors.purple[300],
         ),
       );
       return;
@@ -112,10 +118,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     GestureDetector(
                       onTap: widget.onPressed,
-                      child: const Text("Login now",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          )),
+                      child: const Text(
+                        "Login now",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ],
                 ),

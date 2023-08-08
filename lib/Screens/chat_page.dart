@@ -22,6 +22,13 @@ class _ChatPageState extends State<ChatPage> {
   final TextEditingController _messageController = TextEditingController();
   final ChatService _chatService = ChatService();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final ScrollController _columnScrollController = ScrollController();
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   scrollToBottom();
+  // }
 
   void sendMessage() async {
     if (_messageController.text.isNotEmpty) {
@@ -61,7 +68,9 @@ class _ChatPageState extends State<ChatPage> {
         }
 
         return ListView(
-          children: snapshot.data!.docs
+          controller: _columnScrollController,
+          reverse: true,
+          children: snapshot.data!.docs.reversed
               .map((document) => _buildMessageItem(document))
               .toList(),
         );
@@ -77,30 +86,26 @@ class _ChatPageState extends State<ChatPage> {
         : Alignment.centerLeft;
 
     return Container(
-        alignment: alignment,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment:
-                (data['senderID'] == _firebaseAuth.currentUser!.uid)
-                    ? CrossAxisAlignment.end
-                    : CrossAxisAlignment.start,
-            children: [
-              // Text(data['senderEmail']),
-              (data['senderID'] != _firebaseAuth.currentUser!.uid)
-                  ? ChatBubble(
-                      message: data['message'],
-                      colour: Colors.grey[300]!,
-                    )
-                  : ChatBubble(
-                      message: data['message'], colour: Colors.purple[200]!)
-              // ChatBubble(
-              //   message: data['message'],
-              //   colour: Colors.purple[200]!,
-              // )
-            ],
-          ),
-        ));
+      alignment: alignment,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment:
+              (data['senderID'] == _firebaseAuth.currentUser!.uid)
+                  ? CrossAxisAlignment.end
+                  : CrossAxisAlignment.start,
+          children: [
+            (data['senderID'] != _firebaseAuth.currentUser!.uid)
+                ? ChatBubble(
+                    message: data['message'],
+                    colour: Colors.grey[400]!,
+                  )
+                : ChatBubble(
+                    message: data['message'], colour: Colors.purple[200]!)
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _buildMessageInput() {
@@ -117,17 +122,6 @@ class _ChatPageState extends State<ChatPage> {
               obscureText: false,
             ),
           ),
-          // GestureDetector(
-          //   onTap: sendMessage,
-          //   child: Container(
-          //       width: 50,
-          //       height: 50,
-          //       color: Colors.transparent,
-          //       child: Icon(
-          //         Icons.send,
-          //         size: 40,
-          //       )),
-          // )
           IconButton(
             onPressed: sendMessage,
             padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
