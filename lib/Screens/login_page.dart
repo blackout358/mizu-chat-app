@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mizu/logic/auth/auth_service.dart';
+import 'package:mizu/logic/auth/error_code_handling.dart';
 import 'package:mizu/widgets/app_button.dart';
 import 'package:mizu/widgets/snackbar.dart';
 import 'package:mizu/widgets/text_field.dart';
@@ -26,24 +27,17 @@ class _LoginPageState extends State<LoginPage> {
         passwordController.text,
       );
     } catch (e) {
-      print(e.toString());
-      if (e == 'auth/wrong-password') {
+      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
         CustomSnackBar(
-            text: "Incorrect password",
-            textColour: Colors.black,
-            height: 30,
-            duration: 2,
-            fontSize: 20,
-            backgroundColor: Colors.purple[200]!);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              e.toString(),
-            ),
-          ),
-        );
-      }
+          text: ErrorCodeHandler.errorCodeDebug(e.toString()),
+          textColour: Colors.black,
+          height: 30,
+          duration: 2,
+          fontSize: 20,
+          backgroundColor: Colors.purple[200]!,
+        ),
+      );
     }
   }
 

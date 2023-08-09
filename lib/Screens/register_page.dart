@@ -5,6 +5,8 @@ import 'package:mizu/widgets/snackbar.dart';
 import 'package:mizu/widgets/text_field.dart';
 import 'package:provider/provider.dart';
 
+import '../logic/auth/error_code_handling.dart';
+
 class RegisterPage extends StatefulWidget {
   final VoidCallback onPressed;
   const RegisterPage({super.key, required this.onPressed});
@@ -40,9 +42,15 @@ class _RegisterPageState extends State<RegisterPage> {
         passwordController.text,
       );
     } catch (e) {
+      print(e);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(e.toString()),
+        CustomSnackBar(
+          text: ErrorCodeHandler.errorCodeDebug(e.toString()),
+          textColour: Colors.black,
+          height: 30,
+          duration: 2,
+          fontSize: 20,
+          backgroundColor: Colors.purple[200]!,
         ),
       );
     }
