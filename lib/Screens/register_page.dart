@@ -21,20 +21,11 @@ class _RegisterPageState extends State<RegisterPage> {
   void signUp() async {
     if (passwordController.text != confirmPasswordController.text) {
       ScaffoldMessenger.of(context).showSnackBar(
-        // SnackBar(
-        //   content: const Text(
-        //     "Passwords do not match!",
-        //     style: TextStyle(
-        //       color: Colors.black,
-        //     ),
-        //   ),
-        //   backgroundColor: Colors.purple[300],
-        // ),
         CustomSnackBar(
             text: "Passwords do not match!",
             textColour: Colors.black,
             height: 30,
-            duration: 5,
+            duration: 2,
             fontSize: 20,
             backgroundColor: Colors.purple[200]!),
       );

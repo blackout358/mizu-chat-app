@@ -29,7 +29,8 @@ class AuthService extends ChangeNotifier {
     }
     // catch errors
     on FirebaseAuthException catch (e) {
-      throw Exception(e.code);
+      // print(e.code);
+      throw Exception(e);
     }
   }
 
