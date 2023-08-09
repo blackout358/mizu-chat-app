@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mizu/logic/auth/auth_service.dart';
 import 'package:mizu/widgets/app_button.dart';
+import 'package:mizu/widgets/snackbar.dart';
 import 'package:mizu/widgets/text_field.dart';
 import 'package:provider/provider.dart';
 
@@ -20,15 +21,22 @@ class _RegisterPageState extends State<RegisterPage> {
   void signUp() async {
     if (passwordController.text != confirmPasswordController.text) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text(
-            "Passwords do not match!",
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
-          backgroundColor: Colors.purple[300],
-        ),
+        // SnackBar(
+        //   content: const Text(
+        //     "Passwords do not match!",
+        //     style: TextStyle(
+        //       color: Colors.black,
+        //     ),
+        //   ),
+        //   backgroundColor: Colors.purple[300],
+        // ),
+        CustomSnackBar(
+            text: "Passwords do not match!",
+            textColour: Colors.black,
+            height: 30,
+            duration: 5,
+            fontSize: 20,
+            backgroundColor: Colors.purple[200]!),
       );
       return;
     }
