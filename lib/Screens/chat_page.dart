@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mizu/logic/chat/chat_service.dart';
+import 'package:mizu/logic/chat/timestamp_formater.dart';
 import 'package:mizu/widgets/chat_bubble.dart';
 import 'package:mizu/widgets/text_field.dart';
 
@@ -101,7 +102,10 @@ class _ChatPageState extends State<ChatPage> {
                     colour: Colors.grey[400]!,
                   )
                 : ChatBubble(
-                    message: data['message'], colour: Colors.purple[200]!)
+                    message: data['message'],
+                    colour: Colors.purple[200]!,
+                  ),
+            Text(TimestampFormater.formatTimestamp(data['timestamp']))
           ],
         ),
       ),
