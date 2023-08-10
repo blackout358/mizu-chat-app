@@ -92,4 +92,30 @@ class ChatService extends ChangeNotifier {
           backgroundColor: Colors.purple[200]!);
     }
   }
+
+  static deleteAllMessages(String userID, String otherUserID) async {
+    List<String> ids = [userID, otherUserID];
+    ids.sort();
+    String chatRoomID = ids.join("-");
+    try {
+      final batch = FirebaseFirestore.instance.batch();
+      final messageCollection = FirebaseFirestore.instance
+          .collection('chat_rooms')
+          .doc(chatRoomID)
+          .collection('messages');
+
+      final querySnapshot = await messageCollection.get();
+      for (QueryDocumentSnapshot docSnapshot in querySnapshot.docs) {
+        batch.delete(docSnapshot.reference);
+      }
+      await batch.commit();
+    } catch (e) {
+      CustomSnackBar(
+          text: e.toString(),
+          textColour: Colors.black,
+          height: 40,
+          duration: 5,
+          backgroundColor: Colors.purple[200]!);
+    }
+  }
 }

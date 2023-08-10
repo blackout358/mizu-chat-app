@@ -43,7 +43,29 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.recieverUserEmail)),
+      appBar: AppBar(
+        title: Text(widget.recieverUserEmail),
+        actions: [
+          PopupMenuButton(
+            // add icon, by default "3 dot" icon
+            // icon: Icon(Icons.book)
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem<int>(
+                  value: 0,
+                  child: Text("Clear chat"),
+                ),
+              ];
+            },
+            onSelected: (value) {
+              if (value == 0) {
+                ChatService.deleteAllMessages(
+                    widget.recieverUserID, _firebaseAuth.currentUser!.uid);
+              }
+            },
+          ),
+        ],
+      ),
       body: Column(
         children: [
           Expanded(
