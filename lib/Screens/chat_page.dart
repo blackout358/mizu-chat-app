@@ -104,15 +104,7 @@ class _ChatPageState extends State<ChatPage> {
                     message: data['message'],
                     colour: Colors.grey[400]!,
                     onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: ((context) {
-                          return MyAlertDialog(
-                            dialogText: "Hello world",
-                            onPressed: () {},
-                          );
-                        }),
-                      );
+                      deleteMessageConfirmation(data, document.reference.id);
                       // ChatService.deleteMessage(
                       //     widget.recieverUserID,
                       //     _firebaseAuth.currentUser!.uid,
@@ -123,10 +115,7 @@ class _ChatPageState extends State<ChatPage> {
                     message: data['message'],
                     colour: Colors.purple[200]!,
                     onPressed: () {
-                      MyAlertDialog(
-                        dialogText: "Hello world",
-                        onPressed: () {},
-                      );
+                      deleteMessageConfirmation(data, document.reference.id);
                       // ChatService.deleteMessage(
                       //     widget.recieverUserID,
                       //     _firebaseAuth.currentUser!.uid,
@@ -137,6 +126,23 @@ class _ChatPageState extends State<ChatPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Future<dynamic> deleteMessageConfirmation(
+      Map<String, dynamic> data, String id) {
+    return showDialog(
+      context: context,
+      builder: ((context) {
+        return MyAlertDialog(
+          dialogTitle: 'Confirm',
+          dialogText: "Are you sure you want to delete this message?",
+          onPressed: () {
+            ChatService.deleteMessage(
+                widget.recieverUserID, _firebaseAuth.currentUser!.uid, id);
+          },
+        );
+      }),
     );
   }
 
