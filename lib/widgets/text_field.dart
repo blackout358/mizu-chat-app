@@ -34,7 +34,7 @@ class _MyTextFieldState extends State<MyTextField> {
         // labelText: hintText,
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Color(0xFFEEEEEE)!,
+            color: Color(0xFF7E7E7E)!,
           ),
         ),
         focusedBorder: OutlineInputBorder(
@@ -56,7 +56,7 @@ class _MyTextFieldState extends State<MyTextField> {
               )
             : null,
 
-        fillColor: const Color(0xFF7E7E7E)!,
+        fillColor: const Color(0xFF7E7E7E),
         filled: true,
         hintText: widget.hintText,
         hintStyle: TextStyle(color: Colors.white),

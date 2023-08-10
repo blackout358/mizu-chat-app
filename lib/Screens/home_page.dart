@@ -30,6 +30,15 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("Home"),
         centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            print("heh");
+          },
+          icon: Icon(
+            Icons.settings,
+            // color: Colors.purple[300],
+          ),
+        ),
         actions: [
           IconButton(
             onPressed: signOut,

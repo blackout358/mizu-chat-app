@@ -132,6 +132,7 @@ class _ChatPageState extends State<ChatPage> {
             icon: const Icon(
               Icons.send,
               size: 40,
+              color: Color.fromRGBO(206, 147, 216, 1),
             ),
           ),
         ],
