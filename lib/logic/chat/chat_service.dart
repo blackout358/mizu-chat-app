@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mizu/model/message.dart';
+import 'package:mizu/widgets/snackbar.dart';
 
 class ChatService extends ChangeNotifier {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -64,5 +65,31 @@ class ChatService extends ChangeNotifier {
         .orderBy("timestamp", descending: true)
         .limit(1)
         .snapshots();
+  }
+
+  static deleteMessage(
+      String userID, String otherUserID, String message) async {
+    List<String> ids = [userID, otherUserID];
+    ids.sort();
+    String chatRoomID = ids.join("-");
+    try {
+      await FirebaseFirestore.instance
+          .collection('chat_rooms')
+          .doc(chatRoomID)
+          .collection('messages')
+          .doc(message)
+          .delete()
+          .then(
+            (doc) => print("Document deleted"),
+            onError: (e) => print("Error updating document $e"),
+          );
+    } catch (e) {
+      CustomSnackBar(
+          text: e.toString(),
+          textColour: Colors.black,
+          height: 40,
+          duration: 5,
+          backgroundColor: Colors.purple[200]!);
+    }
   }
 }

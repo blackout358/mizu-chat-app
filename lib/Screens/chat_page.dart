@@ -102,10 +102,24 @@ class _ChatPageState extends State<ChatPage> {
                 ? ChatBubble(
                     message: data['message'],
                     colour: Colors.grey[400]!,
+                    onPressed: () {
+                      ChatService.deleteMessage(
+                          widget.recieverUserID,
+                          _firebaseAuth.currentUser!.uid,
+                          document.reference.id);
+                      print(document.reference.id);
+                    },
                   )
                 : ChatBubble(
                     message: data['message'],
                     colour: Colors.purple[200]!,
+                    onPressed: () {
+                      ChatService.deleteMessage(
+                          widget.recieverUserID,
+                          _firebaseAuth.currentUser!.uid,
+                          document.reference.id);
+                      print(document.reference.id);
+                    },
                   ),
             Text(TimestampFormater.getHourMinute(data['timestamp']))
           ],
