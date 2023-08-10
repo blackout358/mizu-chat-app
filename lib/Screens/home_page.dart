@@ -96,9 +96,6 @@ class _HomePageState extends State<HomePage> {
                   final lastMessage = snapshot.data!.docs[0];
                   final isFromUser =
                       lastMessage['senderID'] == _auth.currentUser!.uid;
-                  // data['senderID'] == _auth.currentUser!.uid
-                  //   ?  Text(lastMessage['message'])
-                  //   : CrossAxisAlignment.start,
                   return Text(
                     lastMessage['message'],
                     style: TextStyle(
@@ -112,43 +109,6 @@ class _HomePageState extends State<HomePage> {
                 } catch (e) {
                   return Text('');
                 }
-                // return Text('');
-                // final lastMessage = snapshot.data!.docs[0];
-                // if (snapshot.data!.docs[0].exists) {
-                //   final lastMessage = snapshot.data!.docs[0];
-                //   final isFromUser =
-                //       lastMessage['senderID'] == _auth.currentUser!.uid;
-                //   // data['senderID'] == _auth.currentUser!.uid
-                //   //   ?  Text(lastMessage['message'])
-                //   //   : CrossAxisAlignment.start,
-                //   return Text(
-                //     lastMessage['message'],
-                //     style: TextStyle(
-                //       color: Colors.grey[500],
-                //       fontWeight:
-                //           isFromUser ? FontWeight.normal : FontWeight.bold,
-                //       fontSize: 17,
-                //       fontFamily: 'RobotoMono',
-                //     ),
-                //   );
-                // }
-                // return Text('');
-                // final isFromUser =
-                //     lastMessage['senderID'] == _auth.currentUser!.uid;
-                // // data['senderID'] == _auth.currentUser!.uid
-                // //   ?  Text(lastMessage['message'])
-                // //   : CrossAxisAlignment.start,
-                // return Text(
-                //   lastMessage['message'],
-                //   style: TextStyle(
-                //     color: Colors.grey[500],
-                //     fontWeight:
-                //         isFromUser ? FontWeight.normal : FontWeight.bold,
-                //     fontSize: 17,
-                //     fontFamily: 'RobotoMono',
-                //   ),
-                // );
-                // return Text(lastMessage['message']);
               },
             ),
             SizedBox(

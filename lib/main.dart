@@ -1,10 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mizu/Screens/login_page.dart';
 import 'package:mizu/firebase_options.dart';
 import 'package:mizu/logic/auth/auth_service.dart';
-import 'package:mizu/logic/auth/login_or_register.dart';
 import 'package:provider/provider.dart';
 
 import 'logic/auth/auth_gate.dart';
@@ -26,9 +24,23 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
         primaryColor: Colors.purple[200],
+        appBarTheme: AppBarTheme(
+          color: Colors.purple[200],
+        ),
+        textTheme: GoogleFonts.robotoTextTheme(
+          Theme.of(context).textTheme,
+        ).apply(bodyColor: Colors.white),
+        /* dark theme settings */
+      ),
+      debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.dark,
+      theme: ThemeData(
+        scaffoldBackgroundColor: Color(0xFF222222),
+        // primaryIconTheme: Colors.white,
+        primaryColor: Color(0xFFCE93D8),
         appBarTheme: AppBarTheme(
           color: Colors.purple[200],
         ),
@@ -37,7 +49,7 @@ class MainApp extends StatelessWidget {
         ),
       ),
       home: Scaffold(
-        backgroundColor: Colors.grey.shade200,
+        // backgroundColor: Color(0xFF3B3B3B),
         body: AuthGate(),
       ),
     );

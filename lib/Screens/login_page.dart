@@ -72,14 +72,15 @@ class _LoginPageState extends State<LoginPage> {
                 MyTextField(
                   controller: passwordController,
                   hintText: "Password",
-                  obscureText: false,
+                  obscureText: true,
+                  // hideText: true,
                 ),
                 const SizedBox(
                   height: 8,
                 ),
                 AppButtons(
                   foregroundColor: Colors.white,
-                  backgroundColor: Colors.black87,
+                  backgroundColor: Colors.purple[200]!,
                   borderColor: Colors.transparent,
                   text: "Login",
                   width: double.infinity,
@@ -96,7 +97,12 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Not a member?"),
+                    const Text(
+                      "Not a member?",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
                     const SizedBox(
                       width: 4,
                     ),
@@ -104,18 +110,12 @@ class _LoginPageState extends State<LoginPage> {
                       onTap: widget.onPressed,
                       child: const Text("Register now",
                           style: TextStyle(
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                           )),
                     ),
                   ],
                 )
-                // Text(
-                //   "AAAA",
-                //   style: TextStyle(
-                //     fontSize: 50,
-                //     color: Colors.purple[200]!,
-                //   ),
-                // ),
               ],
             ),
           ),
