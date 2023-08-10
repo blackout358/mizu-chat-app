@@ -2,16 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TimestampFormater {
   static String getHourMinute(Timestamp time) {
-    // Convert Timestamp to DateTime
     DateTime dateTime = time.toDate();
 
-    // Extract hour and minute
     int hour = dateTime.hour;
     int minute = dateTime.minute;
 
     String hourMinute = "$hour:${minute.toString().padLeft(2, '0')}";
 
-    return hourMinute; // Return the formatted time
+    return hourMinute;
   }
 
   static String getDate(Timestamp time) {
@@ -35,10 +33,6 @@ class TimestampFormater {
     final today = DateTime(now.year, now.month, now.day);
     final yesterday = DateTime(now.year, now.month, now.day - 1);
     final weekAgo = DateTime(now.year, now.month, now.day - 7);
-
-    int hour = dateTime.hour;
-    int minute = dateTime.minute;
-
     var date = DateTime(
       dateTime.year,
       dateTime.month,
@@ -55,10 +49,3 @@ class TimestampFormater {
     }
   }
 }
-/*
-Today = time
-yesterday = "Yesterday"
-this week but not today + yesterday = day name
-else = date
-*/
-
