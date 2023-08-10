@@ -6,6 +6,7 @@ import 'package:mizu/logic/auth/auth_service.dart';
 import 'package:provider/provider.dart';
 import 'package:mizu/logic/chat/chat_service.dart';
 
+import '../logic/chat/timestamp_formater.dart';
 import 'chat_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -72,7 +73,7 @@ class _HomePageState extends State<HomePage> {
             Text(
               data['email'],
               style: TextStyle(
-                fontSize: 22,
+                fontSize: 25,
                 // fontFamily: 'Roboto',
               ),
             ),
@@ -96,15 +97,36 @@ class _HomePageState extends State<HomePage> {
                   final lastMessage = snapshot.data!.docs[0];
                   final isFromUser =
                       lastMessage['senderID'] == _auth.currentUser!.uid;
-                  return Text(
-                    lastMessage['message'],
-                    style: TextStyle(
-                      color: Colors.grey[500],
-                      fontWeight:
-                          isFromUser ? FontWeight.normal : FontWeight.bold,
-                      fontSize: 18,
-                      // fontFamily: GoogleFonts.roboto(),
-                    ),
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        lastMessage['message'],
+                        // textAlign: TextAlign.end,
+                        style: TextStyle(
+                          color: isFromUser
+                              ? Colors.grey[500]!
+                              : Colors.purple[200],
+                          fontWeight:
+                              isFromUser ? FontWeight.normal : FontWeight.bold,
+                          fontSize: 22,
+                          // fontFamily: GoogleFonts.roboto(),
+                        ),
+                      ),
+                      Text(
+                        "${TimestampFormater.formatTime(lastMessage['timestamp'])}",
+                        // textAlign: TextAlign.end,
+                        style: TextStyle(
+                          color: isFromUser
+                              ? Colors.grey[500]!
+                              : Colors.purple[200],
+                          fontWeight:
+                              isFromUser ? FontWeight.normal : FontWeight.bold,
+                          fontSize: 22,
+                          // fontFamily: GoogleFonts.roboto(),
+                        ),
+                      ),
+                    ],
                   );
                 } catch (e) {
                   return Text('');

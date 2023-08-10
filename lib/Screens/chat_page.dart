@@ -105,7 +105,7 @@ class _ChatPageState extends State<ChatPage> {
                     message: data['message'],
                     colour: Colors.purple[200]!,
                   ),
-            Text(TimestampFormater.formatTimestamp(data['timestamp']))
+            Text(TimestampFormater.getHourMinute(data['timestamp']))
           ],
         ),
       ),
