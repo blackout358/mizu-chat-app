@@ -26,6 +26,12 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.purple[200],
+        appBarTheme: AppBarTheme(
+          color: Colors.purple[200],
+        ),
+      ),
       home: Scaffold(
         backgroundColor: Colors.grey.shade200,
         body: AuthGate(),
