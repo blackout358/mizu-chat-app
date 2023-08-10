@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mizu/Screens/login_page.dart';
 import 'package:mizu/firebase_options.dart';
 import 'package:mizu/logic/auth/auth_service.dart';
@@ -30,6 +31,9 @@ class MainApp extends StatelessWidget {
         primaryColor: Colors.purple[200],
         appBarTheme: AppBarTheme(
           color: Colors.purple[200],
+        ),
+        textTheme: GoogleFonts.robotoTextTheme(
+          Theme.of(context).textTheme,
         ),
       ),
       home: Scaffold(
