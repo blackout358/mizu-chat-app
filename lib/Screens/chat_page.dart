@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mizu/logic/chat/chat_service.dart';
 import 'package:mizu/logic/chat/timestamp_formater.dart';
+import 'package:mizu/widgets/alert_dialog.dart';
 import 'package:mizu/widgets/chat_bubble.dart';
 import 'package:mizu/widgets/text_field.dart';
 
@@ -103,22 +104,33 @@ class _ChatPageState extends State<ChatPage> {
                     message: data['message'],
                     colour: Colors.grey[400]!,
                     onPressed: () {
-                      ChatService.deleteMessage(
-                          widget.recieverUserID,
-                          _firebaseAuth.currentUser!.uid,
-                          document.reference.id);
-                      print(document.reference.id);
+                      showDialog(
+                        context: context,
+                        builder: ((context) {
+                          return MyAlertDialog(
+                            dialogText: "Hello world",
+                            onPressed: () {},
+                          );
+                        }),
+                      );
+                      // ChatService.deleteMessage(
+                      //     widget.recieverUserID,
+                      //     _firebaseAuth.currentUser!.uid,
+                      //     document.reference.id);
                     },
                   )
                 : ChatBubble(
                     message: data['message'],
                     colour: Colors.purple[200]!,
                     onPressed: () {
-                      ChatService.deleteMessage(
-                          widget.recieverUserID,
-                          _firebaseAuth.currentUser!.uid,
-                          document.reference.id);
-                      print(document.reference.id);
+                      MyAlertDialog(
+                        dialogText: "Hello world",
+                        onPressed: () {},
+                      );
+                      // ChatService.deleteMessage(
+                      //     widget.recieverUserID,
+                      //     _firebaseAuth.currentUser!.uid,
+                      //     document.reference.id);
                     },
                   ),
             Text(TimestampFormater.getHourMinute(data['timestamp']))
