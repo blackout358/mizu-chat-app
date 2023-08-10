@@ -109,17 +109,22 @@ class _HomePageState extends State<HomePage> {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        lastMessage['message'],
-                        // textAlign: TextAlign.end,
-                        style: TextStyle(
-                          color: isFromUser
-                              ? Colors.grey[500]!
-                              : Colors.purple[200],
-                          fontWeight:
-                              isFromUser ? FontWeight.normal : FontWeight.bold,
-                          fontSize: 22,
-                          // fontFamily: GoogleFonts.roboto(),
+                      Expanded(
+                        child: Text(
+                          lastMessage['message'],
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          // textAlign: TextAlign.end,
+                          style: TextStyle(
+                            color: isFromUser
+                                ? Colors.grey[500]!
+                                : Colors.purple[200],
+                            fontWeight: isFromUser
+                                ? FontWeight.normal
+                                : FontWeight.bold,
+                            fontSize: 22,
+                            // fontFamily: GoogleFonts.roboto(),
+                          ),
                         ),
                       ),
                       Text(

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mizu/logic/chat/chat_service.dart';
 import 'package:mizu/logic/chat/timestamp_formater.dart';
@@ -85,6 +84,9 @@ class _ChatPageState extends State<ChatPage> {
     var alignment = (data['senderID'] == _firebaseAuth.currentUser!.uid)
         ? Alignment.centerRight
         : Alignment.centerLeft;
+
+    // if text is to long it makes an error
+    // fix
 
     return Container(
       alignment: alignment,
