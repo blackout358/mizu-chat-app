@@ -14,7 +14,7 @@ class MyAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget cancelButton = TextButton(
       onPressed: () {
-        Navigator.of(context).pop;
+        Navigator.of(context).pop();
       },
       child: Text("Cancel"),
     );

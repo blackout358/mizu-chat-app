@@ -60,8 +60,20 @@ class _ChatPageState extends State<ChatPage> {
             },
             onSelected: (value) {
               if (value == 0) {
-                ChatService.deleteAllMessages(
-                    widget.recieverUserID, _firebaseAuth.currentUser!.uid);
+                showDialog(
+                  context: context,
+                  builder: ((context) {
+                    return MyAlertDialog(
+                      dialogTitle: 'Confirm',
+                      dialogText:
+                          "Are you sure you want to delete all messages?",
+                      onPressed: () {
+                        ChatService.deleteAllMessages(widget.recieverUserID,
+                            _firebaseAuth.currentUser!.uid);
+                      },
+                    );
+                  }),
+                );
               }
             },
           ),
