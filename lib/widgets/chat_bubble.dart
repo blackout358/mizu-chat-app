@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swipe_to/swipe_to.dart';
 
 class ChatBubble extends StatelessWidget {
   final String message;
@@ -15,6 +16,7 @@ class ChatBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPressed,
+      // onHorizontalDragEnd: onDragged,
       child: Container(
         padding: const EdgeInsets.all(12),
         constraints:

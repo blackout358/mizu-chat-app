@@ -6,6 +6,7 @@ import 'package:mizu/logic/chat/timestamp_formater.dart';
 import 'package:mizu/widgets/alert_dialog.dart';
 import 'package:mizu/widgets/chat_bubble.dart';
 import 'package:mizu/widgets/text_field.dart';
+import 'package:swipe_to/swipe_to.dart';
 
 class ChatPage extends StatefulWidget {
   final String recieverUserEmail;
@@ -104,18 +105,15 @@ class _ChatPageState extends State<ChatPage> {
   Widget _buildMessageItem(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
 
-    var alignment = (data['senderID'] == _firebaseAuth.currentUser!.uid)
-        ? Alignment.centerRight
-        : Alignment.centerLeft;
-
-    // if text is to long it makes an error
-    // fix
-
-    return Container(
-      alignment: alignment,
+    var userCheck = (data['senderID'] == _firebaseAuth.currentUser!.uid);
+    return SwipeTo(
+      onRightSwipe: () {
+        print("object");
+      },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment:
               (data['senderID'] == _firebaseAuth.currentUser!.uid)
                   ? CrossAxisAlignment.end
@@ -127,10 +125,6 @@ class _ChatPageState extends State<ChatPage> {
                     colour: Colors.grey[400]!,
                     onPressed: () {
                       deleteMessageConfirmation(data, document.reference.id);
-                      // ChatService.deleteMessage(
-                      //     widget.recieverUserID,
-                      //     _firebaseAuth.currentUser!.uid,
-                      //     document.reference.id);
                     },
                   )
                 : ChatBubble(
