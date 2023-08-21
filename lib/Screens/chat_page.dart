@@ -134,6 +134,7 @@ class _ChatPageState extends State<ChatPage> {
                   onPressed: () {
                     deleteMessageConfirmation(data, document.reference.id);
                   },
+                  isSender: false,
                   // onDragged: () {},
                 )
               : ChatBubble(
@@ -146,6 +147,7 @@ class _ChatPageState extends State<ChatPage> {
                     //     _firebaseAuth.currentUser!.uid,
                     //     document.reference.id);
                   },
+                  isSender: true,
                   // onDragged: () {},
                 ),
           Text(TimestampFormater.getHourMinute(data['timestamp']))
