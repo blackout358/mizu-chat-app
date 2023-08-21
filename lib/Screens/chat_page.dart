@@ -7,6 +7,7 @@ import 'package:mizu/widgets/alert_dialog.dart';
 import 'package:mizu/widgets/chat_bubble.dart';
 import 'package:mizu/widgets/text_field.dart';
 import 'package:swipe_to/swipe_to.dart';
+import 'package:swipe_widget/swipe_widget.dart';
 
 class ChatPage extends StatefulWidget {
   final String recieverUserEmail;
@@ -118,41 +119,37 @@ class _ChatPageState extends State<ChatPage> {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
 
     var userCheck = (data['senderID'] == _firebaseAuth.currentUser!.uid);
-    return SwipeTo(
-      onRightSwipe: () {
-        print("object");
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment:
-              (data['senderID'] == _firebaseAuth.currentUser!.uid)
-                  ? CrossAxisAlignment.end
-                  : CrossAxisAlignment.start,
-          children: [
-            (data['senderID'] != _firebaseAuth.currentUser!.uid)
-                ? ChatBubble(
-                    message: data['message'],
-                    colour: Colors.grey[400]!,
-                    onPressed: () {
-                      deleteMessageConfirmation(data, document.reference.id);
-                    },
-                  )
-                : ChatBubble(
-                    message: data['message'],
-                    colour: Colors.purple[200]!,
-                    onPressed: () {
-                      deleteMessageConfirmation(data, document.reference.id);
-                      // ChatService.deleteMessage(
-                      //     widget.recieverUserID,
-                      //     _firebaseAuth.currentUser!.uid,
-                      //     document.reference.id);
-                    },
-                  ),
-            Text(TimestampFormater.getHourMinute(data['timestamp']))
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: (data['senderID'] == _firebaseAuth.currentUser!.uid)
+            ? CrossAxisAlignment.end
+            : CrossAxisAlignment.start,
+        children: [
+          (data['senderID'] != _firebaseAuth.currentUser!.uid)
+              ? ChatBubble(
+                  message: data['message'],
+                  colour: Colors.grey[400]!,
+                  onPressed: () {
+                    deleteMessageConfirmation(data, document.reference.id);
+                  },
+                  // onDragged: () {},
+                )
+              : ChatBubble(
+                  message: data['message'],
+                  colour: Colors.purple[200]!,
+                  onPressed: () {
+                    deleteMessageConfirmation(data, document.reference.id);
+                    // ChatService.deleteMessage(
+                    //     widget.recieverUserID,
+                    //     _firebaseAuth.currentUser!.uid,
+                    //     document.reference.id);
+                  },
+                  // onDragged: () {},
+                ),
+          Text(TimestampFormater.getHourMinute(data['timestamp']))
+        ],
       ),
     );
   }

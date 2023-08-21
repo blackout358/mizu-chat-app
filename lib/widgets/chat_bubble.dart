@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swipe_to/swipe_to.dart';
 
-class ChatBubble extends StatelessWidget {
+class ChatBubble extends StatefulWidget {
   final String message;
   final Color colour;
   final VoidCallback onPressed;
@@ -13,24 +13,85 @@ class ChatBubble extends StatelessWidget {
   });
 
   @override
+  State<ChatBubble> createState() => _ChatBubbleState();
+}
+
+class _ChatBubbleState extends State<ChatBubble> {
+  GlobalKey _draggableKey = GlobalKey();
+  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      // onHorizontalDragEnd: onDragged,
-      child: Container(
+    return Draggable(
+      key: _draggableKey,
+      axis: Axis.horizontal,
+      childWhenDragging: Container(
         padding: const EdgeInsets.all(12),
-        constraints:
-            BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.75,
+        ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: colour,
+          color: Colors.transparent,
         ),
         child: Text(
-          message,
-          // softWrap: true,
+          widget.message,
           style: const TextStyle(
             fontSize: 16,
-            color: Colors.white,
+            color: Colors.transparent,
+          ),
+        ),
+      ),
+      feedback: Material(
+        child: Container(
+          // Customize the appearance of the dragged widget if needed
+
+          padding: const EdgeInsets.all(12),
+          constraints: BoxConstraints(
+            maxWidth: MediaQuery.of(context).size.width * 0.75,
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: widget.colour,
+          ),
+          child: Text(
+            widget.message,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Color.fromARGB(255, 255, 255, 255),
+            ),
+          ),
+        ),
+      ),
+      onDragStarted: () {},
+      onDragUpdate: (details) {},
+      onDragEnd: (details) {
+        final RenderBox renderBox =
+            _draggableKey.currentContext!.findRenderObject()! as RenderBox;
+        final offset = renderBox.localToGlobal(Offset.zero);
+        final distanceTraveled = (details.offset.dx - offset.dx).abs();
+
+        final quarterScreenWidth = MediaQuery.of(context).size.width * 0.25;
+
+        if (distanceTraveled >= quarterScreenWidth) {
+          print("replied"); // Perform the reply action
+        }
+      },
+      child: GestureDetector(
+        onTap: widget.onPressed,
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          constraints: BoxConstraints(
+            maxWidth: MediaQuery.of(context).size.width * 0.75,
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: widget.colour,
+          ),
+          child: Text(
+            widget.message,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Colors.white,
+            ),
           ),
         ),
       ),
