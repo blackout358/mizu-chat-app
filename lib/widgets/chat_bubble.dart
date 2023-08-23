@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
-
 class ChatBubble extends StatefulWidget {
   final String message;
   final Color colour;
@@ -40,16 +38,20 @@ class _ChatBubbleState extends State<ChatBubble>
     setState(() {
       if (dragDistance >= MediaQuery.of(context).size.width * 0.20) {
         print("Reply");
-        controller.forward();
+        // controller.forward();
+        controller.reverse();
         print("OffsetX $offsetX");
         print("Drag distance: $dragDistance");
+        offsetX = 0;
+        dragDistance = 0;
       } else {
-        controller.forward();
+        // controller.forward();
+        controller.reverse();
 
         print("OffsetX $offsetX");
         print("Drag distance: $dragDistance");
-        // offsetX = 0;
-        // dragDistance = 0;
+        offsetX = 0;
+        dragDistance = 0;
       }
     });
   }
@@ -59,7 +61,11 @@ class _ChatBubbleState extends State<ChatBubble>
     return Align(
       alignment: widget.isSender ? Alignment.centerRight : Alignment.centerLeft,
       child: GestureDetector(
-        onTap: widget.onPressed,
+        onTap: () {
+          print("OffsetX $offsetX");
+          print("Drag distance: $dragDistance");
+          // widget.onPressed;
+        },
         onHorizontalDragUpdate: (details) {
           double delta = details.primaryDelta ?? 0.0;
           double maxDrag = MediaQuery.of(context).size.width * 0.25;
@@ -83,6 +89,7 @@ class _ChatBubbleState extends State<ChatBubble>
               offset: Offset(
                 offsetX - (offsetX * controller.value),
                 0.0,
+                // offsetX = 0,
               ),
               child: child,
             );
