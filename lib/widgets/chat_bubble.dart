@@ -23,7 +23,7 @@ class _ChatBubbleState extends State<ChatBubble>
     with SingleTickerProviderStateMixin {
   double offsetX = 0.0; // Horizontal offset for dragging
   double dragDistance = 0.0;
-  bool animating = false;
+  double maxDrag = 30;
   late AnimationController controller;
   late Animation<double> iconOpacityAnimation;
   final _key = GlobalKey();
@@ -35,24 +35,16 @@ class _ChatBubbleState extends State<ChatBubble>
       vsync: this,
       duration: Duration(milliseconds: 200),
     );
-    iconOpacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: controller,
-        curve: Curves.easeInOut,
-      ),
-    );
   }
 
   void handleDragEnd() {
     setState(() {
-      if (dragDistance >= MediaQuery.of(context).size.width * 0.20) {
+      if (dragDistance >= maxDrag) {
         print("Reply");
         // controller.animateTo(0.99);
 
         // controller.forward();
         controller.reverse();
-        print("OffsetX $offsetX");
-        print("Drag distance: $dragDistance");
         // controller.
         offsetX = 0;
         dragDistance = 0;
@@ -70,8 +62,17 @@ class _ChatBubbleState extends State<ChatBubble>
     // controller.reverse();
   }
 
-  double calculateArrowOpacity(double size) {
-    return (offsetX / size).clamp(0.0, 1.0);
+  void handleDragUpdate(DragUpdateDetails details) {
+    double delta = details.primaryDelta ?? 0.0;
+
+    setState(
+      () {
+        widget.isSender
+            ? offsetX = (offsetX + delta).clamp(-maxDrag, 0)
+            : offsetX = (offsetX + delta).clamp(0, maxDrag);
+        dragDistance += delta.abs();
+      },
+    );
   }
 
   @override
@@ -93,39 +94,15 @@ class _ChatBubbleState extends State<ChatBubble>
             ),
           ),
           GestureDetector(
-            onTap: () {
-              print("OffsetX $offsetX");
-              print("Drag distance: $dragDistance");
-              // widget.onPressed;
-            },
+            onTap: widget.onPressed,
             onHorizontalDragUpdate: (details) {
-              double delta = details.primaryDelta ?? 0.0;
-              double maxDrag = 30;
-              // iconOpacityAnimation = (offsetX /
-              //     MediaQuery.of(context).size.width *
-              //     0.25) as Animation<double>;
-              // print(controller);
-              // print(iconOpacityAnimation);
-              setState(
-                () {
-                  offsetX = (offsetX + delta).clamp(-maxDrag, maxDrag);
-                  dragDistance += delta.abs();
-                },
-              );
-              // iconOpacityAnimation = Tween<double>(
-              //   begin: 0.0,
-              //   end: (offsetX / maxDrag).clamp(0.0, 1.0),
-              // ) as Animation<double>;
+              handleDragUpdate(details);
             },
             onHorizontalDragCancel: () {
               handleDragEnd();
-              // controller.reset();
-              // controller.dispose();
             },
             onHorizontalDragEnd: (details) {
               handleDragEnd();
-              // controller.reset();
-              // controller.dispose();
             },
             child: AnimatedBuilder(
               animation: controller,
@@ -134,7 +111,6 @@ class _ChatBubbleState extends State<ChatBubble>
                   offset: Offset(
                     offsetX - (offsetX * controller.value),
                     0.0,
-                    // offsetX = 0,
                   ),
                   child: child,
                 );
