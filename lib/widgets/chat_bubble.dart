@@ -82,11 +82,14 @@ class _ChatBubbleState extends State<ChatBubble>
         alignment:
             widget.isSender ? Alignment.centerRight : Alignment.centerLeft,
         children: [
-          Transform.scale(
-            scaleX: widget.isSender ? 1 : -1,
-            child: Icon(
-              Icons.reply,
-              color: Colors.amberAccent,
+          Opacity(
+            opacity: offsetX.abs() / 30,
+            child: Transform.scale(
+              scaleX: widget.isSender ? 1 : -1,
+              child: Icon(
+                Icons.reply,
+                color: offsetX.abs() / 30 < 1 ? Colors.grey[200] : Colors.blue,
+              ),
             ),
           ),
           GestureDetector(
