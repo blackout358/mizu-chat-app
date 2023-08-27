@@ -6,8 +6,6 @@ import 'package:mizu/logic/chat/timestamp_formater.dart';
 import 'package:mizu/widgets/alert_dialog.dart';
 import 'package:mizu/widgets/chat_bubble.dart';
 import 'package:mizu/widgets/text_field.dart';
-import 'package:swipe_to/swipe_to.dart';
-import 'package:swipe_widget/swipe_widget.dart';
 
 class ChatPage extends StatefulWidget {
   final String recieverUserEmail;
@@ -26,12 +24,20 @@ class _ChatPageState extends State<ChatPage> {
   final ChatService _chatService = ChatService();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final ScrollController _columnScrollController = ScrollController();
+  late Map<String, dynamic> replyMessage;
+  final FocusNode focusNode = FocusNode();
 
   // @override
   // void initState() {
   //   super.initState();
   //   scrollToBottom();
   // }
+
+  void replyToMessage(Map<String, dynamic> data) {
+    replyMessage = data;
+    focusNode.requestFocus();
+    print("reploed");
+  }
 
   void sendMessage() async {
     if (_messageController.text.isNotEmpty) {
@@ -118,7 +124,6 @@ class _ChatPageState extends State<ChatPage> {
   Widget _buildMessageItem(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
 
-    var userCheck = (data['senderID'] == _firebaseAuth.currentUser!.uid);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -135,7 +140,9 @@ class _ChatPageState extends State<ChatPage> {
                     deleteMessageConfirmation(data, document.reference.id);
                   },
                   isSender: false,
-                  // onDragged: () {},
+                  onDragged: () {
+                    replyToMessage(data);
+                  },
                 )
               : ChatBubble(
                   message: data['message'],
@@ -148,7 +155,9 @@ class _ChatPageState extends State<ChatPage> {
                     //     document.reference.id);
                   },
                   isSender: true,
-                  // onDragged: () {},
+                  onDragged: () {
+                    replyToMessage(data);
+                  },
                 ),
           Text(TimestampFormater.getHourMinute(data['timestamp']))
         ],
@@ -182,6 +191,7 @@ class _ChatPageState extends State<ChatPage> {
         children: [
           Expanded(
             child: MyTextField(
+              focusNode: focusNode,
               controller: _messageController,
               hintText: 'Enter message',
               obscureText: false,

@@ -4,12 +4,14 @@ class MyTextField extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;
+  final FocusNode? focusNode;
 
   MyTextField({
     super.key,
     required this.controller,
     required this.hintText,
     required this.obscureText,
+    this.focusNode,
   });
 
   @override
@@ -28,6 +30,7 @@ class _MyTextFieldState extends State<MyTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      focusNode: widget.focusNode,
       controller: widget.controller,
       obscureText: hideText,
       decoration: InputDecoration(

@@ -1,18 +1,18 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class ChatBubble extends StatefulWidget {
   final String message;
   final Color colour;
   final bool isSender;
   final VoidCallback onPressed;
+  final VoidCallback onDragged;
 
   ChatBubble({
     required this.message,
     required this.colour,
     required this.isSender,
     required this.onPressed,
+    required this.onDragged,
   });
 
   @override
@@ -38,28 +38,22 @@ class _ChatBubbleState extends State<ChatBubble>
   }
 
   void handleDragEnd() {
-    setState(() {
-      if (dragDistance >= maxDrag) {
-        print("Reply");
-        // controller.animateTo(0.99);
-
-        // controller.forward();
-        controller.reverse();
-        // controller.
-        offsetX = 0;
-        dragDistance = 0;
-      } else {
-        // controller.forward();
-        controller.reverse();
-
-        print("OffsetX $offsetX");
-        print("Drag distance: $dragDistance");
-        // controller.reset();
-        offsetX = 0;
-        dragDistance = 0;
-      }
-    });
-    // controller.reverse();
+    setState(
+      () {
+        if (dragDistance >= maxDrag) {
+          widget.onDragged();
+          controller.reverse();
+          offsetX = 0;
+          dragDistance = 0;
+        } else {
+          controller.reverse();
+          print("OffsetX $offsetX");
+          print("Drag distance: $dragDistance");
+          offsetX = 0;
+          dragDistance = 0;
+        }
+      },
+    );
   }
 
   void handleDragUpdate(DragUpdateDetails details) {
