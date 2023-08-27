@@ -128,7 +128,7 @@ class _ChatBubbleState extends State<ChatBubble>
                         widget.reply!,
                         style: const TextStyle(
                           fontSize: 14,
-                          color: Colors.grey,
+                          color: Colors.red,
                         ),
                       ),
                     Text(

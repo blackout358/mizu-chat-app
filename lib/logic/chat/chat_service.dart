@@ -10,7 +10,7 @@ class ChatService extends ChangeNotifier {
 
   // Send message
   Future<void> sendMessage(
-      String recieverID, String message, String reply) async {
+      String recieverID, String message, String? reply) async {
     // current user info
     final String currentUserID = _firebaseAuth.currentUser!.uid;
     final String currentUserEmail = _firebaseAuth.currentUser!.email.toString();
@@ -22,8 +22,11 @@ class ChatService extends ChangeNotifier {
       recieverID: recieverID,
       message: message,
       timestamp: timestamp,
-      reply: reply,
     );
+
+    if (reply != null) {
+      newMessage.setReply(reply);
+    }
 
     List<String> ids = [
       currentUserID,

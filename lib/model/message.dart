@@ -6,7 +6,7 @@ class Message {
   final String recieverID;
   final String message;
   final Timestamp? timestamp;
-  final String? reply;
+  String? reply;
 
   Message(
       {required this.senderID,
@@ -26,5 +26,9 @@ class Message {
       'timestamp': timestamp,
       'reply': reply,
     };
+  }
+
+  setReply(String replyString) {
+    reply = replyString;
   }
 }

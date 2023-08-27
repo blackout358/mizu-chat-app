@@ -45,7 +45,7 @@ class _ChatPageState extends State<ChatPage> {
   void sendMessage() async {
     if (messageController.text.isNotEmpty) {
       await _chatService.sendMessage(
-          widget.recieverUserID, messageController.text, replyMessage.value!);
+          widget.recieverUserID, messageController.text, replyMessage.value);
 
       messageController.clear();
     }
@@ -152,7 +152,7 @@ class _ChatPageState extends State<ChatPage> {
                   },
                   isSender: false,
                   onDragged: () {
-                    replyToMessage(document['message']);
+                    replyToMessage(document['message'] ?? '');
                   },
                 )
               : ChatBubble(
@@ -164,7 +164,7 @@ class _ChatPageState extends State<ChatPage> {
                   },
                   isSender: true,
                   onDragged: () {
-                    replyToMessage(document['message']);
+                    replyToMessage(document['message'] ?? '');
                   },
                 ),
           Text(TimestampFormater.getHourMinute(data['timestamp']))
