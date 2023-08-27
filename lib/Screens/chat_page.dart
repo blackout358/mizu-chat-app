@@ -8,6 +8,8 @@ import 'package:mizu/widgets/chat_bubble.dart';
 import 'package:mizu/widgets/message_input.dart';
 import 'package:mizu/widgets/text_field.dart';
 
+import '../model/message.dart';
+
 class ChatPage extends StatefulWidget {
   final String recieverUserEmail;
   final String recieverUserID;
@@ -25,7 +27,7 @@ class _ChatPageState extends State<ChatPage> {
   final ChatService _chatService = ChatService();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final ScrollController _columnScrollController = ScrollController();
-  late Map<String, dynamic> replyMessage;
+  ValueNotifier<String?> replyMessage = ValueNotifier<String?>(null);
   final FocusNode focusNode = FocusNode();
 
   // @override
@@ -34,10 +36,10 @@ class _ChatPageState extends State<ChatPage> {
   //   scrollToBottom();
   // }
 
-  void replyToMessage(Map<String, dynamic> data) {
-    replyMessage = data;
+  void replyToMessage(String data) {
+    replyMessage.value = data;
+    print(replyMessage);
     focusNode.requestFocus();
-    print("reploed");
   }
 
   void sendMessage() async {
@@ -98,6 +100,7 @@ class _ChatPageState extends State<ChatPage> {
             sendMessage: () {
               sendMessage();
             },
+            replyMessage: replyMessage,
           ),
         ],
       ),
@@ -148,7 +151,7 @@ class _ChatPageState extends State<ChatPage> {
                   },
                   isSender: false,
                   onDragged: () {
-                    replyToMessage(data);
+                    replyToMessage(document['message']);
                   },
                 )
               : ChatBubble(
@@ -156,14 +159,10 @@ class _ChatPageState extends State<ChatPage> {
                   colour: Colors.purple[200]!,
                   onPressed: () {
                     deleteMessageConfirmation(data, document.reference.id);
-                    // ChatService.deleteMessage(
-                    //     widget.recieverUserID,
-                    //     _firebaseAuth.currentUser!.uid,
-                    //     document.reference.id);
                   },
                   isSender: true,
                   onDragged: () {
-                    replyToMessage(data);
+                    replyToMessage(document['message']);
                   },
                 ),
           Text(TimestampFormater.getHourMinute(data['timestamp']))
@@ -188,37 +187,4 @@ class _ChatPageState extends State<ChatPage> {
       }),
     );
   }
-
-  // Widget _buildMessageInput() {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(20.0),
-  //     child: Column(
-  //       children: [
-  //         Row(
-  //           mainAxisAlignment: MainAxisAlignment.center,
-  //           crossAxisAlignment: CrossAxisAlignment.center,
-  //           children: [
-  //             Expanded(
-  //               child: MyTextField(
-  //                 focusNode: focusNode,
-  //                 controller: _messageController,
-  //                 hintText: 'Enter message',
-  //                 obscureText: false,
-  //               ),
-  //             ),
-  //             IconButton(
-  //               onPressed: sendMessage,
-  //               padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-  //               icon: const Icon(
-  //                 Icons.send,
-  //                 size: 40,
-  //                 color: Color.fromRGBO(206, 147, 216, 1),
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 }

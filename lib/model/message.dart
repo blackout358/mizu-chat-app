@@ -5,14 +5,14 @@ class Message {
   final String senderEmail;
   final String recieverID;
   final String message;
-  final Timestamp timestamp;
+  final Timestamp? timestamp;
 
   Message({
     required this.senderID,
     required this.senderEmail,
     required this.recieverID,
     required this.message,
-    required this.timestamp,
+    this.timestamp,
   });
 
   // Convert to map

@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mizu/logic/auth/auth_service.dart';
 import 'package:provider/provider.dart';
 import 'package:mizu/logic/chat/chat_service.dart';
@@ -32,7 +31,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            print("heh");
+            print("Settings");
           },
           icon: Icon(
             Icons.settings,
