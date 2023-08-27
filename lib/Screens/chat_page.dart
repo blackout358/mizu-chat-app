@@ -5,6 +5,7 @@ import 'package:mizu/logic/chat/chat_service.dart';
 import 'package:mizu/logic/chat/timestamp_formater.dart';
 import 'package:mizu/widgets/alert_dialog.dart';
 import 'package:mizu/widgets/chat_bubble.dart';
+import 'package:mizu/widgets/message_input.dart';
 import 'package:mizu/widgets/text_field.dart';
 
 class ChatPage extends StatefulWidget {
@@ -20,7 +21,7 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  final TextEditingController _messageController = TextEditingController();
+  final TextEditingController messageController = TextEditingController();
   final ChatService _chatService = ChatService();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final ScrollController _columnScrollController = ScrollController();
@@ -40,11 +41,11 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void sendMessage() async {
-    if (_messageController.text.isNotEmpty) {
+    if (messageController.text.isNotEmpty) {
       await _chatService.sendMessage(
-          widget.recieverUserID, _messageController.text);
+          widget.recieverUserID, messageController.text);
 
-      _messageController.clear();
+      messageController.clear();
     }
   }
 
@@ -91,7 +92,13 @@ class _ChatPageState extends State<ChatPage> {
           Expanded(
             child: _buildMessageList(),
           ),
-          _buildMessageInput(),
+          MessageInput(
+            focusNode: focusNode,
+            messageController: messageController,
+            sendMessage: () {
+              sendMessage();
+            },
+          ),
         ],
       ),
     );
@@ -182,32 +189,36 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  Widget _buildMessageInput() {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: MyTextField(
-              focusNode: focusNode,
-              controller: _messageController,
-              hintText: 'Enter message',
-              obscureText: false,
-            ),
-          ),
-          IconButton(
-            onPressed: sendMessage,
-            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-            icon: const Icon(
-              Icons.send,
-              size: 40,
-              color: Color.fromRGBO(206, 147, 216, 1),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildMessageInput() {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(20.0),
+  //     child: Column(
+  //       children: [
+  //         Row(
+  //           mainAxisAlignment: MainAxisAlignment.center,
+  //           crossAxisAlignment: CrossAxisAlignment.center,
+  //           children: [
+  //             Expanded(
+  //               child: MyTextField(
+  //                 focusNode: focusNode,
+  //                 controller: _messageController,
+  //                 hintText: 'Enter message',
+  //                 obscureText: false,
+  //               ),
+  //             ),
+  //             IconButton(
+  //               onPressed: sendMessage,
+  //               padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+  //               icon: const Icon(
+  //                 Icons.send,
+  //                 size: 40,
+  //                 color: Color.fromRGBO(206, 147, 216, 1),
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }
