@@ -4,6 +4,7 @@ class ChatBubble extends StatefulWidget {
   final String message;
   final Color colour;
   final bool isSender;
+  final String? reply;
   final VoidCallback onPressed;
   final VoidCallback onDragged;
 
@@ -13,6 +14,7 @@ class ChatBubble extends StatefulWidget {
     required this.isSender,
     required this.onPressed,
     required this.onDragged,
+    this.reply,
   });
 
   @override
@@ -119,12 +121,24 @@ class _ChatBubbleState extends State<ChatBubble>
                   borderRadius: BorderRadius.circular(8),
                   color: widget.colour,
                 ),
-                child: Text(
-                  widget.message,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
+                child: Column(
+                  children: [
+                    if (widget.reply != null)
+                      Text(
+                        widget.reply!,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    Text(
+                      widget.message,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

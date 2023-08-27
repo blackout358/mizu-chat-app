@@ -36,11 +36,22 @@ class _MessageInputState extends State<MessageInput> {
                   builder: (context, replyMessage, child) {
                     if (replyMessage != null) {
                       return Container(
+                        alignment: Alignment.centerLeft,
                         padding: const EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
+                          color: Color(0xFF7E7E7E),
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(
+                            color: Colors.purple[200]!,
+                            width: 1,
+                          ),
                         ),
-                        child: Text(replyMessage),
+                        child: Text(
+                          replyMessage,
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
                       );
                     } else {
                       return const SizedBox
@@ -58,8 +69,8 @@ class _MessageInputState extends State<MessageInput> {
             ),
           ),
           IconButton(
-            // onPressed: widget.sendMessage,
-            onPressed: () => print(widget.replyMessage),
+            onPressed: widget.sendMessage,
+            // onPressed: () => print(widget.replyMessage),
             padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
             icon: const Icon(
               Icons.send,

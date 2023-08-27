@@ -45,7 +45,7 @@ class _ChatPageState extends State<ChatPage> {
   void sendMessage() async {
     if (messageController.text.isNotEmpty) {
       await _chatService.sendMessage(
-          widget.recieverUserID, messageController.text);
+          widget.recieverUserID, messageController.text, replyMessage.value!);
 
       messageController.clear();
     }
@@ -144,6 +144,7 @@ class _ChatPageState extends State<ChatPage> {
         children: [
           (data['senderID'] != _firebaseAuth.currentUser!.uid)
               ? ChatBubble(
+                  reply: data['reply'],
                   message: data['message'],
                   colour: Colors.grey[400]!,
                   onPressed: () {
@@ -155,6 +156,7 @@ class _ChatPageState extends State<ChatPage> {
                   },
                 )
               : ChatBubble(
+                  reply: data['reply'],
                   message: data['message'],
                   colour: Colors.purple[200]!,
                   onPressed: () {
