@@ -48,7 +48,12 @@ class _ChatPageState extends State<ChatPage> {
           widget.recieverUserID, messageController.text, replyMessage.value);
 
       messageController.clear();
+      clearReply();
     }
+  }
+
+  void clearReply() {
+    replyMessage.value = null;
   }
 
   @override
@@ -98,9 +103,14 @@ class _ChatPageState extends State<ChatPage> {
             focusNode: focusNode,
             messageController: messageController,
             sendMessage: () {
+              // clearReply();
               sendMessage();
+              // clearReply();
             },
             replyMessage: replyMessage,
+            onPressed: () {
+              clearReply();
+            },
           ),
         ],
       ),

@@ -8,12 +8,14 @@ class MessageInput extends StatefulWidget {
   final TextEditingController messageController;
   final VoidCallback sendMessage;
   final ValueNotifier<String?> replyMessage;
+  final VoidCallback onPressed;
   const MessageInput(
       {super.key,
       required this.focusNode,
       required this.messageController,
       required this.sendMessage,
-      required this.replyMessage});
+      required this.replyMessage,
+      required this.onPressed});
 
   @override
   State<MessageInput> createState() => _MessageInputState();
@@ -35,23 +37,9 @@ class _MessageInputState extends State<MessageInput> {
                   valueListenable: widget.replyMessage,
                   builder: (context, replyMessage, child) {
                     if (replyMessage != null) {
-                      return Container(
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          color: Color(0xFF7E7E7E),
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(
-                            color: Colors.purple[200]!,
-                            width: 1,
-                          ),
-                        ),
-                        child: Text(
-                          replyMessage,
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
-                        ),
+                      return ReplyMessage(
+                        replyMessage: replyMessage,
+                        onPressed: widget.onPressed,
                       );
                     } else {
                       return const SizedBox
@@ -68,15 +56,19 @@ class _MessageInputState extends State<MessageInput> {
               ],
             ),
           ),
-          IconButton(
-            onPressed: widget.sendMessage,
-            // onPressed: () => print(widget.replyMessage),
-            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-            icon: const Icon(
-              Icons.send,
-              size: 40,
-              color: Color.fromRGBO(206, 147, 216, 1),
-            ),
+          Column(
+            children: [
+              IconButton(
+                onPressed: widget.sendMessage,
+                // onPressed: () => print(widget.replyMessage),
+                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                icon: const Icon(
+                  Icons.send,
+                  size: 40,
+                  color: Color.fromRGBO(206, 147, 216, 1),
+                ),
+              ),
+            ],
           ),
         ],
       ),

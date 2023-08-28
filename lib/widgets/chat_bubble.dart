@@ -122,20 +122,33 @@ class _ChatBubbleState extends State<ChatBubble>
                   color: widget.colour,
                 ),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     if (widget.reply != null)
-                      Text(
-                        widget.reply!,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.red,
+                      Container(
+                        padding: EdgeInsets.all(5),
+                        // color: Colors.grey,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.grey,
+                        ),
+                        child: Text(
+                          widget.reply!,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                          ),
                         ),
                       ),
-                    Text(
-                      widget.message,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Text(
+                        widget.message,
+                        textAlign: TextAlign.start,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ],

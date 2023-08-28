@@ -35,12 +35,12 @@ class _MyTextFieldState extends State<MyTextField> {
       obscureText: hideText,
       decoration: InputDecoration(
         // labelText: hintText,
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(
-            color: Color(0xFF7E7E7E)!,
+            color: Color(0xFF7E7E7E),
           ),
         ),
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(
             color: Color(0xFFe090df),
           ),

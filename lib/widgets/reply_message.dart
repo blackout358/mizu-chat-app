@@ -1,16 +1,46 @@
 import 'package:flutter/material.dart';
 
 class ReplyMessage extends StatelessWidget {
-  final String message;
-  const ReplyMessage({super.key, required this.message});
+  final String replyMessage;
+  final VoidCallback onPressed;
+  const ReplyMessage(
+      {super.key, required this.replyMessage, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Stack(
       children: [
-        Expanded(
+        Container(
+          alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.fromLTRB(8, 10, 35, 8),
+          decoration: BoxDecoration(
+            color: Color(0xFF7E7E7E),
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(
+              color: Color(0xFFd8d393),
+              width: 1,
+            ),
+          ),
           child: Text(
-            message,
+            replyMessage.toString(),
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
+        ),
+        Positioned(
+          left: 8,
+          child: Container(
+            color: Colors.green[200],
+            width: 5,
+          ),
+        ),
+        Positioned(
+          right: 0,
+          top: 0,
+          child: IconButton(
+            onPressed: onPressed,
+            icon: const Icon(Icons.close),
           ),
         ),
       ],
