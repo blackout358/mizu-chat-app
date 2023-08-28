@@ -24,7 +24,7 @@ class ChatBubble extends StatefulWidget {
 class _ChatBubbleState extends State<ChatBubble>
     with SingleTickerProviderStateMixin {
   double offsetX = 0.0; // Horizontal offset for dragging
-  double dragDistance = 0.0;
+  // double dragDistance = 0.0;
   double maxDrag = 30;
   late AnimationController controller;
   late Animation<double> iconOpacityAnimation;
@@ -42,17 +42,17 @@ class _ChatBubbleState extends State<ChatBubble>
   void handleDragEnd() {
     setState(
       () {
-        if (dragDistance >= maxDrag) {
+        if (offsetX.abs() >= maxDrag) {
           widget.onDragged();
           controller.reverse();
           offsetX = 0;
-          dragDistance = 0;
+          // dragDistance = 0;
         } else {
           controller.reverse();
           print("OffsetX $offsetX");
-          print("Drag distance: $dragDistance");
+          // print("Drag distance: $dragDistance");
           offsetX = 0;
-          dragDistance = 0;
+          // dragDistance = 0;
         }
       },
     );
@@ -66,9 +66,11 @@ class _ChatBubbleState extends State<ChatBubble>
         widget.isSender
             ? offsetX = (offsetX + delta).clamp(-maxDrag, 0)
             : offsetX = (offsetX + delta).clamp(0, maxDrag);
-        dragDistance += delta.abs();
+        // dragDistance += delta.abs();
       },
     );
+    // print("OffsetX $offsetX");
+    // print("Drag distance: $dragDistance");
   }
 
   @override
@@ -125,20 +127,45 @@ class _ChatBubbleState extends State<ChatBubble>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     if (widget.reply != null)
-                      Container(
-                        padding: EdgeInsets.all(5),
-                        // color: Colors.grey,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.grey,
-                        ),
-                        child: Text(
-                          widget.reply!,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Color.fromARGB(255, 255, 255, 255),
+                      Stack(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              print(_key.currentContext?.size?.height);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                              // color: Colors.grey,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.grey[600],
+                              ),
+                              child: Text(
+                                widget.reply!,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(20, 5, 5, 5),
+                            // color: Colors.green[200],
+                            width: 5,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.purple[300],
+                            ),
+                            child: Text(
+                              "",
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: Color.fromARGB(255, 255, 255, 255),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
