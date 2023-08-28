@@ -29,13 +29,6 @@ class ReplyMessage extends StatelessWidget {
           ),
         ),
         Positioned(
-          left: 8,
-          child: Container(
-            color: Colors.green[200],
-            width: 5,
-          ),
-        ),
-        Positioned(
           right: 0,
           top: 0,
           child: IconButton(

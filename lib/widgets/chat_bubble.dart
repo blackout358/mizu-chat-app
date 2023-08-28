@@ -118,6 +118,7 @@ class _ChatBubbleState extends State<ChatBubble>
                 padding: const EdgeInsets.all(12),
                 constraints: BoxConstraints(
                   maxWidth: MediaQuery.of(context).size.width * 0.75,
+                  maxHeight: double.infinity,
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
@@ -127,45 +128,39 @@ class _ChatBubbleState extends State<ChatBubble>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     if (widget.reply != null)
-                      Stack(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              print(_key.currentContext?.size?.height);
-                            },
-                            child: Container(
-                              padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
-                              // color: Colors.grey,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Colors.grey[600],
-                              ),
-                              child: Text(
-                                widget.reply!,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Color.fromARGB(255, 255, 255, 255),
-                                ),
-                              ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                        // height: 48,
+                        // color: Colors.grey,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.grey[600],
+                          border: Border(
+                            left: BorderSide(
+                              color: Colors.purple[300]!,
+                              width: 5,
+                            ),
+                            right: BorderSide(
+                              color: Colors.purple[300]!,
+                              width: 0,
+                            ),
+                            top: BorderSide(
+                              color: Colors.purple[300]!,
+                              width: 0,
+                            ),
+                            bottom: BorderSide(
+                              color: Colors.purple[300]!,
+                              width: 0,
                             ),
                           ),
-                          Container(
-                            padding: EdgeInsets.fromLTRB(20, 5, 5, 5),
-                            // color: Colors.green[200],
-                            width: 5,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.purple[300],
-                            ),
-                            child: Text(
-                              "",
-                              style: const TextStyle(
-                                fontSize: 16,
-                                color: Color.fromARGB(255, 255, 255, 255),
-                              ),
-                            ),
+                        ),
+                        child: Text(
+                          widget.reply!,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Color.fromARGB(255, 255, 255, 255),
                           ),
-                        ],
+                        ),
                       ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
