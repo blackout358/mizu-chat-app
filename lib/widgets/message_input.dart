@@ -4,7 +4,7 @@ import 'package:mizu/widgets/reply_message.dart';
 import 'package:mizu/widgets/text_field.dart';
 
 class MessageInput extends StatefulWidget {
-  final FocusNode focusNode;
+  final FocusNode? focusNode;
   final TextEditingController messageController;
   final VoidCallback sendMessage;
   final ValueNotifier<String?> replyMessage;
@@ -25,7 +25,7 @@ class _MessageInputState extends State<MessageInput> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,7 +60,7 @@ class _MessageInputState extends State<MessageInput> {
             children: [
               IconButton(
                 onPressed: widget.sendMessage,
-                // onPressed: () => print(widget.replyMessage),
+                // onPressed: () => print(widget.focusNode.hasFocus),
                 padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                 icon: const Icon(
                   Icons.send,

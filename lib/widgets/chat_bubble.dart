@@ -129,12 +129,12 @@ class _ChatBubbleState extends State<ChatBubble>
                   children: [
                     if (widget.reply != null)
                       Container(
-                        padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                        padding: EdgeInsets.fromLTRB(8, 5, 5, 5),
                         // height: 48,
                         // color: Colors.grey,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
-                          color: Colors.grey[600],
+                          color: Colors.grey[500],
                           border: Border(
                             left: BorderSide(
                               color: Colors.purple[300]!,
@@ -163,7 +163,8 @@ class _ChatBubbleState extends State<ChatBubble>
                         ),
                       ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      padding: EdgeInsets.fromLTRB(
+                          5, widget.reply != null ? 5 : 0, 5, 0),
                       child: Text(
                         widget.message,
                         textAlign: TextAlign.start,

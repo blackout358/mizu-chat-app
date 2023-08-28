@@ -146,39 +146,43 @@ class _ChatPageState extends State<ChatPage> {
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: (data['senderID'] == _firebaseAuth.currentUser!.uid)
-            ? CrossAxisAlignment.end
-            : CrossAxisAlignment.start,
-        children: [
-          (data['senderID'] != _firebaseAuth.currentUser!.uid)
-              ? ChatBubble(
-                  reply: data['reply'],
-                  message: data['message'],
-                  colour: Colors.grey[400]!,
-                  onPressed: () {
-                    deleteMessageConfirmation(data, document.reference.id);
-                  },
-                  isSender: false,
-                  onDragged: () {
-                    replyToMessage(document['message'] ?? '');
-                  },
-                )
-              : ChatBubble(
-                  reply: data['reply'],
-                  message: data['message'],
-                  colour: Colors.purple[200]!,
-                  onPressed: () {
-                    deleteMessageConfirmation(data, document.reference.id);
-                  },
-                  isSender: true,
-                  onDragged: () {
-                    replyToMessage(document['message'] ?? '');
-                  },
-                ),
-          Text(TimestampFormater.getHourMinute(data['timestamp']))
-        ],
+      child: SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment:
+              (data['senderID'] == _firebaseAuth.currentUser!.uid)
+                  ? CrossAxisAlignment.end
+                  : CrossAxisAlignment.start,
+          children: [
+            (data['senderID'] != _firebaseAuth.currentUser!.uid)
+                ? ChatBubble(
+                    reply: data['reply'],
+                    message: data['message'],
+                    colour: Colors.grey[400]!,
+                    onPressed: () {
+                      deleteMessageConfirmation(data, document.reference.id);
+                    },
+                    isSender: false,
+                    onDragged: () {
+                      replyToMessage(document['message'] ?? '');
+                    },
+                  )
+                : ChatBubble(
+                    reply: data['reply'],
+                    message: data['message'],
+                    colour: Colors.purple[200]!,
+                    onPressed: () {
+                      deleteMessageConfirmation(data, document.reference.id);
+                    },
+                    isSender: true,
+                    onDragged: () {
+                      replyToMessage(document['message'] ?? '');
+                    },
+                  ),
+            Text(TimestampFormater.getHourMinute(data['timestamp']))
+          ],
+        ),
       ),
     );
   }

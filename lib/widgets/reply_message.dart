@@ -16,9 +16,23 @@ class ReplyMessage extends StatelessWidget {
           decoration: BoxDecoration(
             color: Color(0xFF7E7E7E),
             borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-              color: Color(0xFFd8d393),
-              width: 1,
+            border: Border(
+              left: BorderSide(
+                color: Colors.purple[300]!,
+                width: 5,
+              ),
+              right: BorderSide(
+                color: Colors.purple[300]!,
+                width: 0,
+              ),
+              top: BorderSide(
+                color: Colors.purple[300]!,
+                width: 0,
+              ),
+              bottom: BorderSide(
+                color: Colors.purple[300]!,
+                width: 0,
+              ),
             ),
           ),
           child: Text(

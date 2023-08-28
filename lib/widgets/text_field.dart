@@ -42,7 +42,7 @@ class _MyTextFieldState extends State<MyTextField> {
         ),
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(
-            color: Color(0xFFe090df),
+            color: Color(0xFFCE93D8),
           ),
         ),
 
