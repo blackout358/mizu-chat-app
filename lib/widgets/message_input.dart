@@ -8,14 +8,14 @@ class MessageInput extends StatefulWidget {
   final TextEditingController messageController;
   final VoidCallback sendMessage;
   final ValueNotifier<String?> replyMessage;
-  final VoidCallback onPressed;
+  final VoidCallback clearReply;
   const MessageInput(
       {super.key,
       required this.focusNode,
       required this.messageController,
       required this.sendMessage,
       required this.replyMessage,
-      required this.onPressed});
+      required this.clearReply});
 
   @override
   State<MessageInput> createState() => _MessageInputState();
@@ -31,27 +31,31 @@ class _MessageInputState extends State<MessageInput> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-            child: Column(
+            child: Stack(
               children: [
-                ValueListenableBuilder<String?>(
-                  valueListenable: widget.replyMessage,
-                  builder: (context, replyMessage, child) {
-                    if (replyMessage != null) {
-                      return ReplyMessage(
-                        replyMessage: replyMessage,
-                        onPressed: widget.onPressed,
-                      );
-                    } else {
-                      return const SizedBox
-                          .shrink(); // Placeholder for no reply message
-                    }
-                  },
-                ),
-                MyTextField(
-                  focusNode: widget.focusNode,
-                  controller: widget.messageController,
-                  hintText: 'Enter message',
-                  obscureText: false,
+                Column(
+                  children: [
+                    ValueListenableBuilder<String?>(
+                      valueListenable: widget.replyMessage,
+                      builder: (context, replyMessage, child) {
+                        if (replyMessage != null) {
+                          return ReplyMessage(
+                            replyMessage: replyMessage,
+                            onPressed: widget.clearReply,
+                          );
+                        } else {
+                          return const SizedBox
+                              .shrink(); // Placeholder for no reply message
+                        }
+                      },
+                    ),
+                    MyTextField(
+                      focusNode: widget.focusNode,
+                      controller: widget.messageController,
+                      hintText: 'Enter message',
+                      obscureText: false,
+                    ),
+                  ],
                 ),
               ],
             ),

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mizu/logic/chat/chat_service.dart';
 import 'package:mizu/logic/chat/timestamp_formater.dart';
@@ -46,13 +47,11 @@ class _ChatPageState extends State<ChatPage> {
     if (messageController.text.isNotEmpty) {
       await _chatService.sendMessage(
           widget.recieverUserID, messageController.text, replyMessage.value);
-
       messageController.clear();
-      clearReply();
     }
   }
 
-  void clearReply() {
+  void clearReply() async {
     replyMessage.value = null;
   }
 
@@ -63,13 +62,23 @@ class _ChatPageState extends State<ChatPage> {
         title: Text(widget.recieverUserEmail),
         actions: [
           PopupMenuButton(
+            icon: Icon(
+              Icons.more_vert,
+              color: Colors.white,
+            ),
+            // color: Colors.purple[300],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
             // add icon, by default "3 dot" icon
             // icon: Icon(Icons.book)
             itemBuilder: (context) {
               return [
                 PopupMenuItem<int>(
                   value: 0,
-                  child: Text("Clear chat"),
+                  child: Text(
+                    "Clear chat",
+                  ),
                 ),
               ];
             },
@@ -102,16 +111,17 @@ class _ChatPageState extends State<ChatPage> {
           MessageInput(
             focusNode: focusNode,
             messageController: messageController,
-            sendMessage: () {
-              // clearReply();
-              sendMessage();
-              // clearReply();
+            sendMessage: () async {
+              final sendMessageFuture = Future.sync(sendMessage);
+              final clearReplyFuture = Future.sync(clearReply);
+
+              await Future.wait([sendMessageFuture, clearReplyFuture]);
             },
             replyMessage: replyMessage,
-            onPressed: () {
+            clearReply: () {
               clearReply();
             },
-          ),
+          )
         ],
       ),
     );
