@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:mizu/Screens/settings_page.dart';
 import 'package:mizu/logic/auth/auth_service.dart';
 import 'package:provider/provider.dart';
 import 'package:mizu/logic/chat/chat_service.dart';
-
 import '../logic/chat/timestamp_formater.dart';
 import 'chat_page.dart';
 
@@ -31,9 +32,14 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            print("Settings");
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SettingsPage(),
+              ),
+            );
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.settings,
             // color: Colors.purple[300],
           ),
@@ -58,7 +64,12 @@ class _HomePageState extends State<HomePage> {
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Text('loading...');
+          return Center(
+            child: LoadingAnimationWidget.fourRotatingDots(
+              color: Colors.purple[200]!,
+              size: 125,
+            ),
+          );
         }
 
         return ListView(
@@ -127,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Text(
-                        "${TimestampFormater.formatTime(lastMessage['timestamp'])}",
+                        TimestampFormater.formatTime(lastMessage['timestamp']),
                         // textAlign: TextAlign.end,
                         style: TextStyle(
                           color: isFromUser

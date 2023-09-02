@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 
 class AuthService extends ChangeNotifier {
@@ -56,5 +55,20 @@ class AuthService extends ChangeNotifier {
 
   void signOut() async {
     return await FirebaseAuth.instance.signOut();
+  }
+
+  Future<void> updatePassword(String password) async {
+    try {
+      // Sign in
+      var user = _firebaseAuth.currentUser;
+
+      user?.updatePassword(password);
+      // return "Successfully updated password";
+    }
+    // catch errors
+    on FirebaseAuthException catch (e) {
+      // print(e.code);
+      throw Exception(e);
+    }
   }
 }

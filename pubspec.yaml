@@ -15,7 +15,9 @@ dependencies:
   cloud_firestore: ^4.8.4
   google_fonts: ^5.1.0
   swipe_to: ^1.0.2
-  swipe_widget: ^0.0.2+1
+  swipe_widget: ^0.0.2+1 
+  loading_animation_widget: ^1.2.0+4
+  modal_bottom_sheet: ^2.1.2
 
 dev_dependencies:
   flutter_test:

@@ -163,8 +163,8 @@ class _ChatBubbleState extends State<ChatBubble>
                         ),
                       ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(
-                          5, widget.reply != null ? 5 : 0, 5, 0),
+                      padding: EdgeInsets.fromLTRB(widget.reply != null ? 5 : 0,
+                          widget.reply != null ? 5 : 0, 5, 0),
                       child: Text(
                         widget.message,
                         textAlign: TextAlign.start,

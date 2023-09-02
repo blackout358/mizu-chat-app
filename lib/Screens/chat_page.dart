@@ -2,14 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:mizu/logic/chat/chat_service.dart';
 import 'package:mizu/logic/chat/timestamp_formater.dart';
 import 'package:mizu/widgets/alert_dialog.dart';
 import 'package:mizu/widgets/chat_bubble.dart';
 import 'package:mizu/widgets/message_input.dart';
-import 'package:mizu/widgets/text_field.dart';
-
-import '../model/message.dart';
 
 class ChatPage extends StatefulWidget {
   final String recieverUserEmail;
@@ -60,6 +58,7 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.recieverUserEmail),
+        centerTitle: true,
         actions: [
           PopupMenuButton(
             icon: Icon(
@@ -137,7 +136,12 @@ class _ChatPageState extends State<ChatPage> {
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Text('Loading..');
+          return Center(
+            child: LoadingAnimationWidget.fourRotatingDots(
+              color: Colors.purple[200]!,
+              size: 125,
+            ),
+          );
         }
 
         return ListView(
