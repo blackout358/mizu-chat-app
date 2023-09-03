@@ -71,4 +71,19 @@ class AuthService extends ChangeNotifier {
       throw Exception(e);
     }
   }
+
+  Future<void> updateEmail(String email) async {
+    try {
+      // Sign in
+      var user = _firebaseAuth.currentUser;
+
+      user?.updateEmail(email);
+      // return "Successfully updated password";
+    }
+    // catch errors
+    on FirebaseAuthException catch (e) {
+      // print(e.code);
+      throw Exception(e);
+    }
+  }
 }

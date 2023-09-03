@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mizu/Screens/update_email_page.dart';
 import 'package:mizu/Screens/update_password_page.dart';
 import 'package:mizu/logic/auth/auth_service.dart';
 import 'package:provider/provider.dart';
-
-import '../logic/auth/error_code_handling.dart';
-import '../widgets/snackbar.dart';
-import '../widgets/text_field.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -47,37 +44,28 @@ class SettingsPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
+                    builder: (context) => UpdateEmail(),
+                  ),
+                );
+              },
+              title: Text("Change email"),
+              trailing: Icon(Icons.arrow_forward_ios),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
                     builder: (context) => UpdatePassword(),
                   ),
                 );
               },
-              title: Text("Change Password"),
+              title: Text("Change password"),
               trailing: Icon(Icons.arrow_forward_ios),
             ),
-          )
-          // Row(
-          //   children: [
-          //     Container(
-          //       width: MediaQuery.of(context).size.width * 0.75,
-          //       child: MyTextField(
-          //         controller: messageController,
-          //         hintText: 'Enter message',
-          //         obscureText: false,
-          //       ),
-          //     ),
-          //     IconButton(
-          //       onPressed: updatePassword,
-
-          //       // onPressed: () => print(widget.focusNode.hasFocus),
-          //       padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-          //       icon: const Icon(
-          //         Icons.send,
-          //         size: 40,
-          //         color: Color.fromRGBO(206, 147, 216, 1),
-          //       ),
-          //     ),
-          //   ],
-          // )
+          ),
         ],
       ),
     );
