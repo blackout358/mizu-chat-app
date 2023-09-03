@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mizu/Screens/update_password_page.dart';
 import 'package:mizu/logic/auth/auth_service.dart';
 import 'package:provider/provider.dart';
 
@@ -13,22 +14,22 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController messageController = TextEditingController();
     final authService = Provider.of<AuthService>(context, listen: false);
-    void updatePassword() async {
-      try {
-        await authService.updatePassword(messageController.text);
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          CustomSnackBar(
-            text: ErrorCodeHandler.errorCodeDebug(e.toString()),
-            textColour: Colors.black,
-            height: 30,
-            duration: 2,
-            fontSize: 20,
-            backgroundColor: Colors.purple[200]!,
-          ),
-        );
-      }
-    }
+    // void updatePassword() async {
+    //   try {
+    //     await authService.updatePassword(messageController.text);
+    //   } catch (e) {
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //       CustomSnackBar(
+    //         text: ErrorCodeHandler.errorCodeDebug(e.toString()),
+    //         textColour: Colors.black,
+    //         height: 30,
+    //         duration: 2,
+    //         fontSize: 20,
+    //         backgroundColor: Colors.purple[200]!,
+    //       ),
+    //     );
+    //   }
+    // }
 
     return Scaffold(
       appBar: AppBar(
@@ -37,32 +38,46 @@ class SettingsPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Text(
-            "Hello WOrod",
+          SizedBox(
+            height: 10,
           ),
-          Row(
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width * 0.75,
-                child: MyTextField(
-                  controller: messageController,
-                  hintText: 'Enter message',
-                  obscureText: false,
-                ),
-              ),
-              IconButton(
-                onPressed: updatePassword,
-
-                // onPressed: () => print(widget.focusNode.hasFocus),
-                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                icon: const Icon(
-                  Icons.send,
-                  size: 40,
-                  color: Color.fromRGBO(206, 147, 216, 1),
-                ),
-              ),
-            ],
+          Card(
+            child: ListTile(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UpdatePassword(),
+                  ),
+                );
+              },
+              title: Text("Change Password"),
+              trailing: Icon(Icons.arrow_forward_ios),
+            ),
           )
+          // Row(
+          //   children: [
+          //     Container(
+          //       width: MediaQuery.of(context).size.width * 0.75,
+          //       child: MyTextField(
+          //         controller: messageController,
+          //         hintText: 'Enter message',
+          //         obscureText: false,
+          //       ),
+          //     ),
+          //     IconButton(
+          //       onPressed: updatePassword,
+
+          //       // onPressed: () => print(widget.focusNode.hasFocus),
+          //       padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+          //       icon: const Icon(
+          //         Icons.send,
+          //         size: 40,
+          //         color: Color.fromRGBO(206, 147, 216, 1),
+          //       ),
+          //     ),
+          //   ],
+          // )
         ],
       ),
     );
