@@ -108,11 +108,8 @@ class _HomePageState extends State<HomePage> {
                 }
 
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: LoadingAnimationWidget.fourRotatingDots(
-                      color: Colors.purple[200]!,
-                      size: 125,
-                    ),
+                  return const Text(
+                    'Loading...',
                   );
                 }
                 try {

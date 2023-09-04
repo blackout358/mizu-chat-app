@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:mizu/widgets/app_button.dart';
 import 'package:provider/provider.dart';
 
-import '../logic/auth/auth_service.dart';
-import '../logic/auth/error_code_handling.dart';
-import '../widgets/snackbar.dart';
-import '../widgets/text_field.dart';
+import 'package:mizu/logic/auth/auth_service.dart';
+import 'package:mizu/logic/auth/error_code_handling.dart';
+import 'package:mizu/widgets/snackbar.dart';
+import 'package:mizu/widgets/text_field.dart';
+
+import '../logic/account management/account_service.dart';
 
 class UpdatePassword extends StatelessWidget {
   const UpdatePassword({super.key});
@@ -21,52 +23,9 @@ class UpdatePassword extends StatelessWidget {
     final TextEditingController newPasswordController = TextEditingController();
     final TextEditingController confirmOldPasswordController =
         TextEditingController();
-    final authService = Provider.of<AuthService>(context, listen: false);
-    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-    final user = _firebaseAuth.currentUser;
+    final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+    final user = firebaseAuth.currentUser;
     const double spacing = 15;
-
-    void clearControllers() {
-      newPasswordController.clear();
-      confirmPasswordController.clear();
-      confirmOldPasswordController.clear();
-    }
-
-    void updatePassword() async {
-      if (user == null) {
-        return;
-      }
-      try {
-        final userCredential = EmailAuthProvider.credential(
-          email: user.email ?? "",
-          password: confirmOldPasswordController.text,
-        );
-        await user.reauthenticateWithCredential(userCredential);
-
-        if (newPasswordController.text == confirmPasswordController.text) {
-          if (newPasswordController.text.isNotEmpty) {
-            await user.updatePassword(newPasswordController.text);
-            if (context.mounted) {
-              CustomSnackBar.snackBarOne(
-                  "Password updated successfully", context);
-            }
-            clearControllers();
-          } else {
-            if (context.mounted) {
-              CustomSnackBar.snackBarOne(
-                  "New password cannot be empty", context);
-            }
-          }
-        } else {
-          if (context.mounted) {
-            CustomSnackBar.snackBarOne("Passwords do not match", context);
-          }
-        }
-      } catch (e) {
-        final errorMessage = ErrorCodeHandler.errorCodeDebug(e.toString());
-        CustomSnackBar.snackBarOne(errorMessage, context);
-      }
-    }
 
     return Scaffold(
         appBar: AppBar(
@@ -113,7 +72,13 @@ class UpdatePassword extends StatelessWidget {
                   height: 65,
                   borderRadius: 10,
                   onPressed: () {
-                    updatePassword();
+                    AccountService.updatePassword(
+                      user,
+                      confirmPasswordController,
+                      newPasswordController,
+                      confirmOldPasswordController,
+                      context,
+                    );
                   },
                   fontSize: 0.03,
                 ),
