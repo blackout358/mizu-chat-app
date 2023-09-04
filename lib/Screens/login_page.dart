@@ -28,15 +28,19 @@ class _LoginPageState extends State<LoginPage> {
       );
     } catch (e) {
       print(e);
-      ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar(
-          text: ErrorCodeHandler.errorCodeDebug(e.toString()),
-          textColour: Colors.black,
-          height: 30,
-          duration: 2,
-          fontSize: 20,
-          backgroundColor: Colors.purple[200]!,
-        ),
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   CustomSnackBar(
+      //     text: ErrorCodeHandler.errorCodeDebug(e.toString()),
+      //     textColour: Colors.black,
+      //     height: 30,
+      //     duration: 2,
+      //     fontSize: 20,
+      //     backgroundColor: Colors.purple[200]!,
+      //   ),
+      // );
+      CustomSnackBar.snackBarOne(
+        ErrorCodeHandler.errorCodeDebug(e.toString()),
+        context,
       );
     }
   }

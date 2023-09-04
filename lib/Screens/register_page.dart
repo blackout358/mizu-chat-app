@@ -22,15 +22,11 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void signUp() async {
     if (passwordController.text != confirmPasswordController.text) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar(
-            text: "Passwords do not match!",
-            textColour: Colors.black,
-            height: 30,
-            duration: 2,
-            fontSize: 20,
-            backgroundColor: Colors.purple[200]!),
+      CustomSnackBar.snackBarOne(
+        "Passwords do not match!",
+        context,
       );
+
       return;
     }
 
@@ -43,16 +39,20 @@ class _RegisterPageState extends State<RegisterPage> {
       );
     } catch (e) {
       print(e);
-      ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar(
-          text: ErrorCodeHandler.errorCodeDebug(e.toString()),
-          textColour: Colors.black,
-          height: 30,
-          duration: 2,
-          fontSize: 20,
-          backgroundColor: Colors.purple[200]!,
-        ),
+      CustomSnackBar.snackBarOne(
+        ErrorCodeHandler.errorCodeDebug(e.toString()),
+        context,
       );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   CustomSnackBar(
+      //     text: ErrorCodeHandler.errorCodeDebug(e.toString()),
+      //     textColour: Colors.black,
+      //     height: 30,
+      //     duration: 2,
+      //     fontSize: 20,
+      //     backgroundColor: Colors.purple[200]!,
+      //   ),
+      // );
     }
   }
 

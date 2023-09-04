@@ -20,29 +20,12 @@ class UpdateEmail extends StatelessWidget {
     final user = _firebaseAuth.currentUser;
     const double spacing = 15;
 
-    void showSnackBar(String text) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        CustomSnackBar(
-          text: text,
-          textColour: Colors.black,
-          height: 30,
-          duration: 2,
-          fontSize: 20,
-          backgroundColor: Colors.purple[200]!,
-        ),
-      );
-    }
-
-    void showSuccessSnackBar(String text) {
-      showSnackBar(text);
-    }
-
     void clearControllers() {
       newEmailController.clear();
       confirmPasswordController.clear();
     }
 
-    void updateEmail() async {
+    void updateEmail(BuildContext context) async {
       if (user == null) {
         return;
       }
@@ -55,14 +38,20 @@ class UpdateEmail extends StatelessWidget {
 
         if (newEmailController.text.isNotEmpty) {
           await user.updateEmail(newEmailController.text);
-          showSuccessSnackBar("Email updated successfully");
+
+          if (context.mounted) {
+            CustomSnackBar.snackBarOne("Email updated successfully", context);
+          }
+
           clearControllers();
         } else {
-          showSnackBar("New email cannot be empty");
+          if (context.mounted) {
+            CustomSnackBar.snackBarOne("New email cannot be empty", context);
+          }
         }
       } catch (e) {
         final errorMessage = ErrorCodeHandler.errorCodeDebug(e.toString());
-        showSnackBar(errorMessage);
+        CustomSnackBar.snackBarOne(errorMessage, context);
       }
     }
 
@@ -103,7 +92,7 @@ class UpdateEmail extends StatelessWidget {
                   height: 65,
                   borderRadius: 10,
                   onPressed: () {
-                    updateEmail();
+                    updateEmail(context);
                   },
                   fontSize: 0.03,
                 ),

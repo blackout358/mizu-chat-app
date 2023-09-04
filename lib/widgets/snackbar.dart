@@ -24,4 +24,17 @@ class CustomSnackBar extends SnackBar {
           duration: Duration(seconds: duration),
           backgroundColor: backgroundColor,
         );
+
+  static void snackBarOne(String text, BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      CustomSnackBar(
+        text: text,
+        textColour: Colors.black,
+        height: 30,
+        duration: 2,
+        fontSize: 20,
+        backgroundColor: Colors.purple[200]!,
+      ),
+    );
+  }
 }
