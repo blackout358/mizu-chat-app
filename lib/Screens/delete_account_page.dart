@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class _DeleteAccountState extends State<DeleteAccount> {
     final TextEditingController confirmController = TextEditingController();
     final TextEditingController emailController = TextEditingController();
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+    final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
     final user = _firebaseAuth.currentUser;
     const double spacing = 15;
     final _formKey = GlobalKey<FormState>();
@@ -59,7 +61,12 @@ class _DeleteAccountState extends State<DeleteAccount> {
                 dialogText: "",
                 dialogTitle: "Delete Confirmation",
                 confirmController: confirmController,
-                onPressed: () {
+                onPressed: () async {
+                  print(user.uid);
+                  await FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(user.uid)
+                      .delete();
                   user.delete();
                 },
               );

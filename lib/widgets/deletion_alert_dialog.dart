@@ -54,7 +54,7 @@ class _MyDeletionDialogState extends State<MyDeletionDialog> {
       onPressed: isValid
           ? () {
               widget.onPressed();
-              Navigator.of(context).pop();
+              Navigator.popUntil(context, (route) => route.isFirst);
             }
           : null,
       child: Text("Confirm"),
