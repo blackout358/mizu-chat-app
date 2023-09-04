@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mizu/logic/auth/auth_service.dart';
 import 'package:mizu/logic/auth/error_code_handling.dart';
 import 'package:mizu/widgets/alert_dialog.dart';
 import 'package:mizu/widgets/deletion_alert_dialog.dart';
@@ -36,37 +37,31 @@ class _DeleteAccountState extends State<DeleteAccount> {
       confirmPasswordController.clear();
     }
 
-    void checkConfirm() {
-      if (confirmController.text == "CONFIRM") {
-        enableButton = true;
-      } else {
-        enableButton = false;
-      }
-    }
-
     void deleteAccount(BuildContext context) async {
       if (user == null) {
         return;
       }
+      if (passwordController.text != confirmPasswordController.text) {
+        CustomSnackBar.snackBarOne("Passwords are not the same", context);
+        return;
+      }
       try {
-        // final userCredential = EmailAuthProvider.credential(
-        //   email: user.email ?? "",
-        //   password: confirmPasswordController.text,
-        // );
-        // await user.reauthenticateWithCredential(userCredential);
+        final userCredential = EmailAuthProvider.credential(
+          email: user.email ?? "",
+          password: confirmPasswordController.text,
+        );
+        await user.reauthenticateWithCredential(userCredential);
         if (context.mounted) {
           showDialog(
             context: context,
             builder: ((context) {
               return MyDeletionDialog(
                 dialogText: "",
-                checkEnable: enableButton,
                 dialogTitle: "Delete Confirmation",
                 confirmController: confirmController,
                 onPressed: () {
-                  print("Deleted");
+                  user.delete();
                 },
-                onChange: checkConfirm,
               );
             }),
           );
@@ -79,7 +74,7 @@ class _DeleteAccountState extends State<DeleteAccount> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Change email"),
+        title: Text("Delete account"),
         centerTitle: true,
       ),
       body: Center(

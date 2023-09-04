@@ -72,18 +72,18 @@ class AuthService extends ChangeNotifier {
     }
   }
 
-  Future<void> updateEmail(String email) async {
-    try {
-      var user = _firebaseAuth.currentUser;
+  // Future<void> updateEmail(String email) async {
+  //   try {
+  //     var user = _firebaseAuth.currentUser;
 
-      user?.updateEmail(email);
-    }
-    // catch errors
-    on FirebaseAuthException catch (e) {
-      // print(e.code);
-      throw Exception(e);
-    }
-  }
+  //     user?.updateEmail(email);
+  //   }
+  //   // catch errors
+  //   on FirebaseAuthException catch (e) {
+  //     // print(e.code);
+  //     throw Exception(e);
+  //   }
+  // }
 
   Future<void> deleteAccount(String email) async {
     try {

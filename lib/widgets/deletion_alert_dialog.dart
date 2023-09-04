@@ -5,18 +5,15 @@ import 'package:mizu/widgets/text_field_validator.dart';
 class MyDeletionDialog extends StatefulWidget {
   final String dialogTitle;
   final String dialogText;
-  final bool checkEnable;
   final VoidCallback onPressed;
   final TextEditingController confirmController;
 
   MyDeletionDialog({
     Key? key,
     required this.dialogText,
-    required this.checkEnable,
     required this.dialogTitle,
     required this.confirmController,
     required this.onPressed,
-    required void Function() onChange,
   }) : super(key: key);
 
   @override
@@ -54,7 +51,12 @@ class _MyDeletionDialogState extends State<MyDeletionDialog> {
     );
 
     Widget confirmButton = TextButton(
-      onPressed: isValid ? widget.onPressed : null,
+      onPressed: isValid
+          ? () {
+              widget.onPressed();
+              Navigator.of(context).pop();
+            }
+          : null,
       child: Text("Confirm"),
     );
 
