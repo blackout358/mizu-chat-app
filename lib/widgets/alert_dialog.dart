@@ -21,8 +21,8 @@ class MyAlertDialog extends StatelessWidget {
 
     Widget confirmButton = TextButton(
       onPressed: () {
-        onPressed(); // Execute the action
-        Navigator.of(context).pop(); // Close the dialog
+        onPressed();
+        Navigator.of(context).pop();
       },
       child: Text("Confirm"),
     );

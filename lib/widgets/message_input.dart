@@ -43,8 +43,7 @@ class _MessageInputState extends State<MessageInput> {
                             onPressed: widget.clearReply,
                           );
                         } else {
-                          return const SizedBox
-                              .shrink(); // Placeholder for no reply message
+                          return const SizedBox.shrink();
                         }
                       },
                     ),
@@ -63,7 +62,6 @@ class _MessageInputState extends State<MessageInput> {
             children: [
               IconButton(
                 onPressed: widget.sendMessage,
-                // onPressed: () => print(widget.focusNode.hasFocus),
                 padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                 icon: const Icon(
                   Icons.send,

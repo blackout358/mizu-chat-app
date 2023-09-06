@@ -43,16 +43,6 @@ class _RegisterPageState extends State<RegisterPage> {
         ErrorCodeHandler.errorCodeDebug(e.toString()),
         context,
       );
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   CustomSnackBar(
-      //     text: ErrorCodeHandler.errorCodeDebug(e.toString()),
-      //     textColour: Colors.black,
-      //     height: 30,
-      //     duration: 2,
-      //     fontSize: 20,
-      //     backgroundColor: Colors.purple[200]!,
-      //   ),
-      // );
     }
   }
 
@@ -71,7 +61,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   "assets/mizu_app_icon.png",
                   width: 150,
                   height: 150,
-                  // color: Colors.transparent,
                 ),
                 const SizedBox(
                   height: 50,

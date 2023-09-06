@@ -41,7 +41,6 @@ class _HomePageState extends State<HomePage> {
           },
           icon: const Icon(
             Icons.settings,
-            // color: Colors.purple[300],
           ),
         ),
         actions: [
@@ -93,7 +92,6 @@ class _HomePageState extends State<HomePage> {
               data['email'],
               style: TextStyle(
                 fontSize: 25,
-                // fontFamily: 'Roboto',
               ),
             ),
             SizedBox(
@@ -124,7 +122,6 @@ class _HomePageState extends State<HomePage> {
                           lastMessage['message'],
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
-                          // textAlign: TextAlign.end,
                           style: TextStyle(
                             color: isFromUser
                                 ? Colors.grey[500]!
@@ -133,7 +130,6 @@ class _HomePageState extends State<HomePage> {
                                 ? FontWeight.normal
                                 : FontWeight.bold,
                             fontSize: 22,
-                            // fontFamily: GoogleFonts.roboto(),
                           ),
                         ),
                       ),
@@ -147,7 +143,6 @@ class _HomePageState extends State<HomePage> {
                           fontWeight:
                               isFromUser ? FontWeight.normal : FontWeight.bold,
                           fontSize: 22,
-                          // fontFamily: GoogleFonts.roboto(),
                         ),
                       ),
                     ],

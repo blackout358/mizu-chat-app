@@ -23,8 +23,7 @@ class ChatBubble extends StatefulWidget {
 
 class _ChatBubbleState extends State<ChatBubble>
     with SingleTickerProviderStateMixin {
-  double offsetX = 0.0; // Horizontal offset for dragging
-  // double dragDistance = 0.0;
+  double offsetX = 0.0;
   double maxDrag = 30;
   late AnimationController controller;
   late Animation<double> iconOpacityAnimation;
@@ -46,13 +45,10 @@ class _ChatBubbleState extends State<ChatBubble>
           widget.onDragged();
           controller.reverse();
           offsetX = 0;
-          // dragDistance = 0;
         } else {
           controller.reverse();
           print("OffsetX $offsetX");
-          // print("Drag distance: $dragDistance");
           offsetX = 0;
-          // dragDistance = 0;
         }
       },
     );
@@ -66,11 +62,8 @@ class _ChatBubbleState extends State<ChatBubble>
         widget.isSender
             ? offsetX = (offsetX + delta).clamp(-maxDrag, 0)
             : offsetX = (offsetX + delta).clamp(0, maxDrag);
-        // dragDistance += delta.abs();
       },
     );
-    // print("OffsetX $offsetX");
-    // print("Drag distance: $dragDistance");
   }
 
   @override
@@ -130,8 +123,6 @@ class _ChatBubbleState extends State<ChatBubble>
                     if (widget.reply != null)
                       Container(
                         padding: EdgeInsets.fromLTRB(8, 5, 5, 5),
-                        // height: 48,
-                        // color: Colors.grey,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: Colors.grey[500],

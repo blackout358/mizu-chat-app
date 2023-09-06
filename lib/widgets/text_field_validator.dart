@@ -20,7 +20,6 @@ class _MyDeletionTextFieldState extends State<MyDeletionTextField> {
     return TextField(
       controller: widget.controller,
       decoration: InputDecoration(
-        // labelText: hintText,
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(
             color: Color(0xFF7E7E7E),
@@ -31,19 +30,11 @@ class _MyDeletionTextFieldState extends State<MyDeletionTextField> {
             color: Color(0xFFCE93D8),
           ),
         ),
-
         fillColor: const Color(0xFF7E7E7E),
         filled: true,
         hintText: widget.hintText,
         hintStyle: TextStyle(color: Colors.white),
       ),
-      // validator: (text) {
-      //   if (text == "CONFIRM") {
-      //     widget.isValid = true;
-      //   } else {
-      //     widget.isValid = false;
-      //   }
-      // },
     );
   }
 }

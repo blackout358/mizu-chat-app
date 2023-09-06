@@ -34,7 +34,6 @@ class _MyTextFieldState extends State<MyTextField> {
       controller: widget.controller,
       obscureText: hideText,
       decoration: InputDecoration(
-        // labelText: hintText,
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(
             color: Color(0xFF7E7E7E),
@@ -45,7 +44,6 @@ class _MyTextFieldState extends State<MyTextField> {
             color: Color(0xFFCE93D8),
           ),
         ),
-
         suffixIcon: widget.obscureText
             ? IconButton(
                 icon: Icon(
@@ -58,7 +56,6 @@ class _MyTextFieldState extends State<MyTextField> {
                 },
               )
             : null,
-
         fillColor: const Color(0xFF7E7E7E),
         filled: true,
         hintText: widget.hintText,
