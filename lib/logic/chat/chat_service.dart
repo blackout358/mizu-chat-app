@@ -22,11 +22,8 @@ class ChatService extends ChangeNotifier {
       recieverID: recieverID,
       message: message,
       timestamp: timestamp,
+      reply: reply,
     );
-
-    if (reply != null) {
-      newMessage.setReply(reply);
-    }
 
     List<String> ids = [
       currentUserID,

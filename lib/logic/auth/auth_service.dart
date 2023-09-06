@@ -18,7 +18,6 @@ class AuthService extends ChangeNotifier {
         email: email,
         password: password,
       );
-
       _fireStore.collection('users').doc(userCredential.user!.uid).set({
         'uid': userCredential.user!.uid,
         'email': email,
@@ -55,46 +54,5 @@ class AuthService extends ChangeNotifier {
 
   void signOut() async {
     return await FirebaseAuth.instance.signOut();
-  }
-
-  Future<void> updatePassword(String password) async {
-    try {
-      // Sign in
-      var user = _firebaseAuth.currentUser;
-
-      user?.updatePassword(password);
-      // return "Successfully updated password";
-    }
-    // catch errors
-    on FirebaseAuthException catch (e) {
-      // print(e.code);
-      throw Exception(e);
-    }
-  }
-
-  // Future<void> updateEmail(String email) async {
-  //   try {
-  //     var user = _firebaseAuth.currentUser;
-
-  //     user?.updateEmail(email);
-  //   }
-  //   // catch errors
-  //   on FirebaseAuthException catch (e) {
-  //     // print(e.code);
-  //     throw Exception(e);
-  //   }
-  // }
-
-  Future<void> deleteAccount(String email) async {
-    try {
-      var user = _firebaseAuth.currentUser;
-
-      user?.delete();
-    }
-    // catch errors
-    on FirebaseAuthException catch (e) {
-      // print(e.code);
-      throw Exception(e);
-    }
   }
 }
