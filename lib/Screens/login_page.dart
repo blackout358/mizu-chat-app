@@ -27,7 +27,6 @@ class _LoginPageState extends State<LoginPage> {
         passwordController.text,
       );
     } catch (e) {
-      print(e);
       CustomSnackBar.snackBarOne(
         ErrorCodeHandler.errorCodeDebug(e.toString()),
         context,

@@ -4,7 +4,7 @@ class MyDeletionTextField extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
 
-  MyDeletionTextField({
+  const MyDeletionTextField({
     super.key,
     required this.controller,
     required this.hintText,
@@ -33,7 +33,7 @@ class _MyDeletionTextFieldState extends State<MyDeletionTextField> {
         fillColor: const Color(0xFF7E7E7E),
         filled: true,
         hintText: widget.hintText,
-        hintStyle: TextStyle(color: Colors.white),
+        hintStyle: const TextStyle(color: Colors.white),
       ),
     );
   }

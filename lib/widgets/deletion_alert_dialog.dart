@@ -7,7 +7,7 @@ class MyDeletionDialog extends StatefulWidget {
   final VoidCallback onPressed;
   final TextEditingController confirmController;
 
-  MyDeletionDialog({
+  const MyDeletionDialog({
     Key? key,
     required this.dialogText,
     required this.dialogTitle,
@@ -46,7 +46,7 @@ class _MyDeletionDialogState extends State<MyDeletionDialog> {
       onPressed: () {
         Navigator.of(context).pop();
       },
-      child: Text("Cancel"),
+      child: const Text("Cancel"),
     );
 
     Widget confirmButton = TextButton(
@@ -56,27 +56,25 @@ class _MyDeletionDialogState extends State<MyDeletionDialog> {
               Navigator.popUntil(context, (route) => route.isFirst);
             }
           : null,
-      child: Text("Confirm"),
+      child: const Text("Confirm"),
     );
 
-    Container typeBox = Container(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            "Are you sure you want to delete your account? Type "
-            "CONFIRM"
-            " to confirm",
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          MyDeletionTextField(
-            controller: widget.confirmController,
-            hintText: "",
-          ),
-        ],
-      ),
+    Column typeBox = Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Text(
+          "Are you sure you want to delete your account? Type "
+          "CONFIRM"
+          " to confirm",
+        ),
+        const SizedBox(
+          height: 15,
+        ),
+        MyDeletionTextField(
+          controller: widget.confirmController,
+          hintText: "",
+        ),
+      ],
     );
 
     return AlertDialog(

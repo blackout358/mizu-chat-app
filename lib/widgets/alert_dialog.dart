@@ -4,7 +4,7 @@ class MyAlertDialog extends StatelessWidget {
   final String dialogTitle;
   final String dialogText;
   final VoidCallback onPressed;
-  MyAlertDialog(
+  const MyAlertDialog(
       {super.key,
       required this.dialogText,
       required this.onPressed,
@@ -16,7 +16,7 @@ class MyAlertDialog extends StatelessWidget {
       onPressed: () {
         Navigator.of(context).pop();
       },
-      child: Text("Cancel"),
+      child: const Text("Cancel"),
     );
 
     Widget confirmButton = TextButton(
@@ -24,7 +24,7 @@ class MyAlertDialog extends StatelessWidget {
         onPressed();
         Navigator.of(context).pop();
       },
-      child: Text("Confirm"),
+      child: const Text("Confirm"),
     );
 
     return AlertDialog(

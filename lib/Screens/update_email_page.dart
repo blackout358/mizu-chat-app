@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mizu/logic/account%20management/account_service.dart';
 import 'package:mizu/widgets/app_button.dart';
@@ -21,7 +20,7 @@ class UpdateEmail extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("Change email"),
+          title: const Text("Change email"),
           centerTitle: true,
         ),
         body: Center(
@@ -36,7 +35,7 @@ class UpdateEmail extends StatelessWidget {
                   hintText: "New email",
                   obscureText: false,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: spacing,
                 ),
                 MyTextField(
@@ -44,7 +43,7 @@ class UpdateEmail extends StatelessWidget {
                   hintText: "Password",
                   obscureText: true,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: spacing,
                 ),
                 AppButtons(

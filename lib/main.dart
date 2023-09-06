@@ -38,9 +38,9 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,
       theme: ThemeData(
-        scaffoldBackgroundColor: Color(0xFF222222),
+        scaffoldBackgroundColor: const Color(0xFF222222),
         // primaryIconTheme: Colors.white,
-        primaryColor: Color(0xFFCE93D8),
+        primaryColor: const Color(0xFFCE93D8),
         appBarTheme: AppBarTheme(
           color: Colors.purple[200],
         ),
@@ -48,8 +48,7 @@ class MainApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: Scaffold(
-        // backgroundColor: Color(0xFF3B3B3B),
+      home: const Scaffold(
         body: AuthGate(),
       ),
     );

@@ -80,11 +80,7 @@ class ChatService extends ChangeNotifier {
           .doc(chatRoomID)
           .collection('messages')
           .doc(message)
-          .delete()
-          .then(
-            (doc) => print("Document deleted"),
-            onError: (e) => print("Error updating document $e"),
-          );
+          .delete();
     } catch (e) {
       CustomSnackBar(
           text: e.toString(),

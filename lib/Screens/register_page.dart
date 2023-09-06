@@ -38,7 +38,6 @@ class _RegisterPageState extends State<RegisterPage> {
         passwordController.text,
       );
     } catch (e) {
-      print(e);
       CustomSnackBar.snackBarOne(
         ErrorCodeHandler.errorCodeDebug(e.toString()),
         context,

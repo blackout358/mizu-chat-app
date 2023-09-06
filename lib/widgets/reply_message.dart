@@ -14,7 +14,7 @@ class ReplyMessage extends StatelessWidget {
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.fromLTRB(8, 10, 35, 8),
           decoration: BoxDecoration(
-            color: Color(0xFF7E7E7E),
+            color: const Color(0xFF7E7E7E),
             borderRadius: BorderRadius.circular(5),
             border: Border(
               left: BorderSide(
@@ -37,7 +37,7 @@ class ReplyMessage extends StatelessWidget {
           ),
           child: Text(
             replyMessage.toString(),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
             ),
           ),

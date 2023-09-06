@@ -6,7 +6,7 @@ class MyTextField extends StatefulWidget {
   final bool obscureText;
   final FocusNode? focusNode;
 
-  MyTextField({
+  const MyTextField({
     super.key,
     required this.controller,
     required this.hintText,
@@ -59,7 +59,7 @@ class _MyTextFieldState extends State<MyTextField> {
         fillColor: const Color(0xFF7E7E7E),
         filled: true,
         hintText: widget.hintText,
-        hintStyle: TextStyle(color: Colors.white),
+        hintStyle: const TextStyle(color: Colors.white),
       ),
     );
   }

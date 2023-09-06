@@ -20,13 +20,13 @@ class _DeleteAccountState extends State<DeleteAccount> {
         TextEditingController();
     final TextEditingController confirmController = TextEditingController();
     final TextEditingController emailController = TextEditingController();
-    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-    final user = _firebaseAuth.currentUser;
+    final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+    final user = firebaseAuth.currentUser;
     const double spacing = 15;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Delete account"),
+        title: const Text("Delete account"),
         centerTitle: true,
       ),
       body: Center(
@@ -41,7 +41,7 @@ class _DeleteAccountState extends State<DeleteAccount> {
                 hintText: "Email",
                 obscureText: false,
               ),
-              SizedBox(
+              const SizedBox(
                 height: spacing,
               ),
               MyTextField(
@@ -49,7 +49,7 @@ class _DeleteAccountState extends State<DeleteAccount> {
                 hintText: "Password",
                 obscureText: true,
               ),
-              SizedBox(
+              const SizedBox(
                 height: spacing,
               ),
               MyTextField(
@@ -57,7 +57,7 @@ class _DeleteAccountState extends State<DeleteAccount> {
                 hintText: "Confirm password",
                 obscureText: true,
               ),
-              SizedBox(
+              const SizedBox(
                 height: spacing,
               ),
               AppButtons(

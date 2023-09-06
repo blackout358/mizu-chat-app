@@ -10,12 +10,12 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settings"),
+        title: const Text("Settings"),
         centerTitle: true,
       ),
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Card(
@@ -24,12 +24,12 @@ class SettingsPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => UpdateEmail(),
+                    builder: (context) => const UpdateEmail(),
                   ),
                 );
               },
-              title: Text("Change email"),
-              trailing: Icon(Icons.arrow_forward_ios),
+              title: const Text("Change email"),
+              trailing: const Icon(Icons.arrow_forward_ios),
             ),
           ),
           Card(
@@ -38,32 +38,32 @@ class SettingsPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => UpdatePassword(),
+                    builder: (context) => const UpdatePassword(),
                   ),
                 );
               },
-              title: Text("Change password"),
-              trailing: Icon(Icons.arrow_forward_ios),
+              title: const Text("Change password"),
+              trailing: const Icon(Icons.arrow_forward_ios),
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Card(
             child: ListTile(
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DeleteAccount(),
+                    builder: (context) => const DeleteAccount(),
                   ),
                 );
               },
-              title: Text(
+              title: const Text(
                 "Delete account",
                 style: TextStyle(
                   color: Colors.red,
                 ),
               ),
-              trailing: Icon(
+              trailing: const Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.red,
               ),

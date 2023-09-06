@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:mizu/logic/chat/chat_service.dart';
@@ -31,7 +30,6 @@ class _ChatPageState extends State<ChatPage> {
 
   void replyToMessage(String data) {
     replyMessage.value = data;
-    print(replyMessage);
     focusNode.requestFocus();
   }
 
@@ -55,7 +53,7 @@ class _ChatPageState extends State<ChatPage> {
         centerTitle: true,
         actions: [
           PopupMenuButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.more_vert,
               color: Colors.white,
             ),
@@ -64,7 +62,7 @@ class _ChatPageState extends State<ChatPage> {
             ),
             itemBuilder: (context) {
               return [
-                PopupMenuItem<int>(
+                const PopupMenuItem<int>(
                   value: 0,
                   child: Text(
                     "Clear chat",
@@ -152,7 +150,7 @@ class _ChatPageState extends State<ChatPage> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment:

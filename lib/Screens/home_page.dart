@@ -28,14 +28,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),
+        title: const Text("Home"),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SettingsPage(),
+                builder: (context) => const SettingsPage(),
               ),
             );
           },
@@ -90,11 +90,11 @@ class _HomePageState extends State<HomePage> {
           children: [
             Text(
               data['email'],
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 25,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             StreamBuilder(
@@ -148,11 +148,11 @@ class _HomePageState extends State<HomePage> {
                     ],
                   );
                 } catch (e) {
-                  return Text('');
+                  return const Text('');
                 }
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
           ],

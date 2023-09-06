@@ -24,7 +24,7 @@ class UpdatePassword extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("Change password"),
+          title: const Text("Change password"),
           centerTitle: true,
         ),
         body: Center(
@@ -39,7 +39,7 @@ class UpdatePassword extends StatelessWidget {
                   hintText: "Current password",
                   obscureText: true,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: spacing,
                 ),
                 MyTextField(
@@ -47,7 +47,7 @@ class UpdatePassword extends StatelessWidget {
                   hintText: "New password",
                   obscureText: true,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: spacing,
                 ),
                 MyTextField(
@@ -55,7 +55,7 @@ class UpdatePassword extends StatelessWidget {
                   hintText: "Confirm new password",
                   obscureText: true,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: spacing,
                 ),
                 AppButtons(

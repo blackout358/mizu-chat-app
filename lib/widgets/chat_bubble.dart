@@ -8,7 +8,8 @@ class ChatBubble extends StatefulWidget {
   final VoidCallback onPressed;
   final VoidCallback onDragged;
 
-  ChatBubble({
+  const ChatBubble({
+    super.key,
     required this.message,
     required this.colour,
     required this.isSender,
@@ -18,10 +19,10 @@ class ChatBubble extends StatefulWidget {
   });
 
   @override
-  _ChatBubbleState createState() => _ChatBubbleState();
+  ChatBubbleState createState() => ChatBubbleState();
 }
 
-class _ChatBubbleState extends State<ChatBubble>
+class ChatBubbleState extends State<ChatBubble>
     with SingleTickerProviderStateMixin {
   double offsetX = 0.0;
   double maxDrag = 30;
@@ -34,7 +35,7 @@ class _ChatBubbleState extends State<ChatBubble>
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 200),
     );
   }
 
@@ -47,7 +48,6 @@ class _ChatBubbleState extends State<ChatBubble>
           offsetX = 0;
         } else {
           controller.reverse();
-          print("OffsetX $offsetX");
           offsetX = 0;
         }
       },
@@ -122,7 +122,7 @@ class _ChatBubbleState extends State<ChatBubble>
                   children: [
                     if (widget.reply != null)
                       Container(
-                        padding: EdgeInsets.fromLTRB(8, 5, 5, 5),
+                        padding: const EdgeInsets.fromLTRB(8, 5, 5, 5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: Colors.grey[500],
