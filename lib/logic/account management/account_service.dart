@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,8 @@ import 'package:mizu/logic/auth/auth_service.dart';
 import 'package:mizu/logic/auth/error_code_handling.dart';
 import 'package:mizu/widgets/snackbar.dart';
 import 'package:mizu/widgets/text_field.dart';
+
+import '../../widgets/deletion_alert_dialog.dart';
 
 class AccountService {
   static void updatePassword(
@@ -82,6 +85,52 @@ class AccountService {
         if (context.mounted) {
           CustomSnackBar.snackBarOne("New email cannot be empty", context);
         }
+      }
+    } catch (e) {
+      final errorMessage = ErrorCodeHandler.errorCodeDebug(e.toString());
+      CustomSnackBar.snackBarOne(errorMessage, context);
+    }
+  }
+
+  static void deleteAccount(
+    BuildContext context,
+    User? user,
+    TextEditingController confirmPasswordController,
+    TextEditingController passwordController,
+    TextEditingController confirmController,
+  ) async {
+    if (user == null) {
+      return;
+    }
+    if (passwordController.text != confirmPasswordController.text) {
+      CustomSnackBar.snackBarOne("Passwords are not the same", context);
+      return;
+    }
+    try {
+      final userCredential = EmailAuthProvider.credential(
+        email: user.email ?? "",
+        password: confirmPasswordController.text,
+      );
+      await user.reauthenticateWithCredential(userCredential);
+      if (context.mounted) {
+        showDialog(
+          context: context,
+          builder: ((context) {
+            return MyDeletionDialog(
+              dialogText: "",
+              dialogTitle: "Delete Confirmation",
+              confirmController: confirmController,
+              onPressed: () async {
+                print(user.uid);
+                await FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(user.uid)
+                    .delete();
+                user.delete();
+              },
+            );
+          }),
+        );
       }
     } catch (e) {
       final errorMessage = ErrorCodeHandler.errorCodeDebug(e.toString());

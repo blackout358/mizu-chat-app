@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mizu/logic/account%20management/account_service.dart';
 import 'package:mizu/logic/auth/auth_service.dart';
 import 'package:mizu/logic/auth/error_code_handling.dart';
 import 'package:mizu/widgets/alert_dialog.dart';
@@ -37,46 +38,6 @@ class _DeleteAccountState extends State<DeleteAccount> {
       confirmPasswordController.clear();
       passwordController.clear();
       confirmPasswordController.clear();
-    }
-
-    void deleteAccount(BuildContext context) async {
-      if (user == null) {
-        return;
-      }
-      if (passwordController.text != confirmPasswordController.text) {
-        CustomSnackBar.snackBarOne("Passwords are not the same", context);
-        return;
-      }
-      try {
-        final userCredential = EmailAuthProvider.credential(
-          email: user.email ?? "",
-          password: confirmPasswordController.text,
-        );
-        await user.reauthenticateWithCredential(userCredential);
-        if (context.mounted) {
-          showDialog(
-            context: context,
-            builder: ((context) {
-              return MyDeletionDialog(
-                dialogText: "",
-                dialogTitle: "Delete Confirmation",
-                confirmController: confirmController,
-                onPressed: () async {
-                  print(user.uid);
-                  await FirebaseFirestore.instance
-                      .collection('users')
-                      .doc(user.uid)
-                      .delete();
-                  user.delete();
-                },
-              );
-            }),
-          );
-        }
-      } catch (e) {
-        final errorMessage = ErrorCodeHandler.errorCodeDebug(e.toString());
-        CustomSnackBar.snackBarOne(errorMessage, context);
-      }
     }
 
     return Scaffold(
@@ -124,7 +85,12 @@ class _DeleteAccountState extends State<DeleteAccount> {
                 height: 65,
                 borderRadius: 10,
                 onPressed: () {
-                  deleteAccount(context);
+                  AccountService.deleteAccount(
+                      context,
+                      user,
+                      confirmPasswordController,
+                      passwordController,
+                      confirmController);
                 },
                 fontSize: 0.03,
               ),

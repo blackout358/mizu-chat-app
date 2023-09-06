@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildUserListItem(DocumentSnapshot documents) {
     Map<String, dynamic> data = documents.data()! as Map<String, dynamic>;
 
-    if (_auth.currentUser!.email != data['email']) {
+    if (_auth.currentUser!.uid != data['uid']) {
       return ListTile(
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
