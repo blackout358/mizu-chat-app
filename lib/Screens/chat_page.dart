@@ -29,12 +29,6 @@ class _ChatPageState extends State<ChatPage> {
   ValueNotifier<String?> replyMessage = ValueNotifier<String?>(null);
   final FocusNode focusNode = FocusNode();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   scrollToBottom();
-  // }
-
   void replyToMessage(String data) {
     replyMessage.value = data;
     print(replyMessage);
@@ -65,12 +59,9 @@ class _ChatPageState extends State<ChatPage> {
               Icons.more_vert,
               color: Colors.white,
             ),
-            // color: Colors.purple[300],
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
-            // add icon, by default "3 dot" icon
-            // icon: Icon(Icons.book)
             itemBuilder: (context) {
               return [
                 PopupMenuItem<int>(

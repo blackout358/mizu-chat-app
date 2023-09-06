@@ -1,9 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mizu/logic/auth/login_or_register.dart';
-
-import 'package:mizu/Screens/login_page.dart';
 
 import '../../Screens/home_page.dart';
 

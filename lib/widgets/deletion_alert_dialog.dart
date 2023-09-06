@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mizu/widgets/text_field.dart';
 import 'package:mizu/widgets/text_field_validator.dart';
 
 class MyDeletionDialog extends StatefulWidget {

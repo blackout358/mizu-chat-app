@@ -1,12 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mizu/widgets/app_button.dart';
-import 'package:provider/provider.dart';
 
-import 'package:mizu/logic/auth/auth_service.dart';
-import 'package:mizu/logic/auth/error_code_handling.dart';
-import 'package:mizu/widgets/snackbar.dart';
 import 'package:mizu/widgets/text_field.dart';
 
 import '../logic/account management/account_service.dart';

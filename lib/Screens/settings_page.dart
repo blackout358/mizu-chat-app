@@ -8,8 +8,6 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController messageController = TextEditingController();
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Settings"),
